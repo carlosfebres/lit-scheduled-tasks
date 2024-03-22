@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.json",
+  "include": ["src/**/*", "tests/**/*"],
+  "compilerOptions": {
+    "target": "es2020",
+    "module": "esnext",
+    "lib": ["es2020"],
+    "esModuleInterop": true,
+    "outDir": "dist"
+  },
+  "ts-node": {
+    "esm": true,
+    "moduleTypes": {
+      "*.ts": "cjs"
+    }
+  }
+}

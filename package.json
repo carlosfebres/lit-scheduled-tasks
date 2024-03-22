@@ -1,0 +1,38 @@
+{
+  "name": "lit-scheduled-tasks",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Scheduled tasks for LIT Protocol",
+  "homepage": "https://github.com/LIT-protocol/lit-scheduled-tasks",
+  "scripts": {
+    "build": "pnpm -r run build",
+    "lint": "pnpm -r run lint",
+    "clean": "pnpm exec rm -Rf node_modules && pnpm --parallel -r run clean",
+    "test": "pnpm -r run test"
+  },
+  "packageManager": "pnpm@8.15.5",
+  "keywords": [],
+  "author": "Daryl Collins <daryl@darylcollins.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "@tsconfig/node18": "^18.2.2",
+    "@types/chai": "^4.3.14",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^20.11.30",
+    "@typescript-eslint/eslint-plugin": "^7.3.1",
+    "@typescript-eslint/parser": "^7.3.1",
+    "chai": "^5.1.0",
+    "eslint": "^8.57.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^18.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-chai-friendly": "^0.7.4",
+    "eslint-plugin-import": "^2.29.1",
+    "mocha": "^10.3.0",
+    "prettier": "^3.2.5",
+    "prettier-plugin-jsdoc": "^1.3.0",
+    "tsx": "^4.7.1",
+    "typescript": "^5.4.3",
+    "unbuild": "^2.0.0"
+  }
+}

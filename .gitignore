@@ -1,0 +1,10 @@
+/packages/**/dist
+node_modules
+
+# IDE config
+/.idea
+/.vscode
+
+# System Files
+.DS_Store
+Thumbs.db

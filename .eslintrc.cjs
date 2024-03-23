@@ -1,3 +1,7 @@
+/**
+ * Eslint config applies to all packages - except each package must define mocha-specific overrides
+ * due to complexity in identifying dependencies and their sources from parent package.json files
+ */
 module.exports = {
   root: true,
   env: { node: true },

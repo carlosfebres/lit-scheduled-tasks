@@ -17,7 +17,7 @@
   ],
   "scripts": {
     "build": "pnpm unbuild",
-    "lint": "pnpm eslint",
+    "lint": "pnpm eslint .",
     "clean": "pnpm exec rm -Rf node_modules dist",
     "stub": "pnpm unbuild --stub",
     "test": "pnpm mocha",
@@ -27,6 +27,7 @@
     "@hokify/agenda": "^6.3.0"
   },
   "devDependencies": {
+    "chai": "^5.1.0",
     "dotenv": "^16.4.5"
   }
 }

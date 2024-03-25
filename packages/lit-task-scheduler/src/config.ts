@@ -10,6 +10,13 @@ const envConfigSchema: z.ZodType<EnvConfig> = z
   })
   .required() as z.ZodTypeAny;
 
-export function getConfigFromEnv() {
-  return envConfigSchema.parse(process.env);
+/**
+ * Loads configuration from process.env in a type-safe way (thanks Zod!)
+ *
+ * Throws immediately if any critical configuration is missing from process.env
+ *
+ * @returns {EnvConfig}
+ */
+export function getConfigFromEnv(env: any): EnvConfig {
+  return envConfigSchema.parse(env);
 }

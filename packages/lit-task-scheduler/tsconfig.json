@@ -7,11 +7,5 @@
     "lib": ["es2020"],
     "esModuleInterop": true,
     "outDir": "dist"
-  },
-  "ts-node": {
-    "esm": true,
-    "moduleTypes": {
-      "*.ts": "cjs"
-    }
   }
 }

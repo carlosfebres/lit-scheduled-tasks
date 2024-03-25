@@ -1,6 +1,6 @@
 /**
- * Eslint config applies to all packages - except each package must define mocha-specific overrides
- * due to complexity in identifying dependencies and their sources from parent package.json files
+ * Eslint config applies to all packages - except each package must define mocha-specific overrides due to complexity in
+ * identifying dependencies and their sources from parent package.json files
  */
 module.exports = {
   root: true,
@@ -8,7 +8,7 @@ module.exports = {
   parserOptions: {
     project: './tsconfig.json',
   },
-  plugins: ['import', 'chai-friendly'],
+  plugins: ['import', 'chai-friendly', 'sort-destructure-keys', 'sort-keys-plus'],
   overrides: [
     {
       files: ['*.ts', '*.tsx', '*.js', '*.jsx'],
@@ -19,6 +19,8 @@ module.exports = {
         'plugin:import/recommended',
         'plugin:import/typescript',
         'plugin:chai-friendly/recommended',
+        'plugin:typescript-sort-keys/recommended',
+        'prettier',
       ],
       settings: {
         'import/resolver': {
@@ -26,7 +28,6 @@ module.exports = {
             extensions: ['.js', '.jsx', '.ts', '.tsx'],
           },
         },
-        // "import/internal-regex": "^@lit-protocol/",
         'import/parsers': {
           '@typescript-eslint/parser': ['.ts', '.tsx'],
         },
@@ -47,6 +48,21 @@ module.exports = {
             groups: ['builtin', 'external', 'internal', ['sibling', 'parent', 'index'], 'object', 'type'],
           },
         ],
+        'typescript-sort-keys/interface': 'error',
+        'typescript-sort-keys/string-enum': 'error',
+        'sort-keys-plus/sort-keys': [
+          'error',
+          'asc',
+          {
+            caseSensitive: false,
+            natural: true,
+            minKeys: 2,
+            allowLineSeparatedGroups: true,
+            allCaps: 'first',
+            shorthand: 'first',
+          },
+        ],
+        'sort-destructure-keys/sort-destructure-keys': ['error', { caseSensitive: false }],
       },
     },
   ],

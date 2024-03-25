@@ -21,13 +21,14 @@
     "clean": "pnpm exec rm -Rf node_modules dist",
     "stub": "pnpm unbuild --stub",
     "test": "pnpm mocha",
-    "start": "nvm use && node dotenv/config dist/bin/start.js"
+    "start": "pnpm stub && node @dotenvx/dotenvx dist/bin/start.js"
   },
   "dependencies": {
-    "@hokify/agenda": "^6.3.0"
+    "@hokify/agenda": "^6.3.0",
+    "mongodb": "^6.5.0"
   },
   "devDependencies": {
-    "chai": "^5.1.0",
-    "dotenv": "^16.4.5"
+    "@dotenvx/dotenvx": "^0.26.0",
+    "chai": "^5.1.0"
   }
 }

@@ -1,4 +1,4 @@
+import { getConfigFromEnv } from './config';
 import createServer from './createServer';
 
-// eslint-disable-next-line import/prefer-default-export
-export { createServer };
+export { createServer, getConfigFromEnv };

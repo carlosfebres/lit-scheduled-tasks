@@ -87,6 +87,9 @@ importers:
 
   packages/lit-task-auto-top-up:
     dependencies:
+      '@hokify/agenda':
+        specifier: ^6.3.0
+        version: 6.3.0
       '@lit-protocol/contracts-sdk':
         specifier: ^4.1.1
         version: 4.1.1

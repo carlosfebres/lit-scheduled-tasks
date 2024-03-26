@@ -1,6 +1,7 @@
 import awaity from 'awaity';
 import consola from 'consola';
 import _ from 'lodash';
+import VError from 'verror';
 
 import { LitContracts } from '@lit-protocol/contracts-sdk';
 
@@ -20,6 +21,7 @@ const RECIPIENT_LIST_URL =
 // TODO: Load private key from env, set on contracts instance for local signing of mint & transfer txs
 const contracts = new LitContracts();
 
+// TODO: Clarify exactly what each element of this will include. Should we be parsing out quota data?
 async function fetchRecipientList(): Promise<string[]> {
   try {
     const res = await fetch(RECIPIENT_LIST_URL);
@@ -41,7 +43,7 @@ async function fetchRecipientList(): Promise<string[]> {
   }
 }
 
-async function getCapacityTokenId({ recipientAddress }: { recipientAddress: string }) {
+async function mintCapacityCreditNFT({ recipientAddress }: { recipientAddress: string }) {
   try {
     const { capacityTokenIdStr } = await contracts.mintCapacityCreditsNFT({
       daysUntilUTCMidnightExpiration: 1,
@@ -98,9 +100,10 @@ async function transferCapacityTokenNFT({
 }
 
 async function handleRecipient({ recipientAddress }: { recipientAddress: string }): Promise<string> {
-  const capacityTokenIdStr = await getCapacityTokenId({ recipientAddress });
+  const capacityTokenIdStr = await mintCapacityCreditNFT({ recipientAddress });
   await transferCapacityTokenNFT({ capacityTokenIdStr, recipientAddress });
 
+  // FIXME; Return recipient plus capacity token ID
   return capacityTokenIdStr;
 }
 
@@ -135,6 +138,7 @@ export default async function autoTopUpTask(job: Job) {
     3 // Let us mint 3 at a time so this isn't too slow but isn't a spammy deluge
   );
 
+  // TODO: Feels like this shouldn't require an 'as unknown as SettledResultsGroup'
   const { fulfilled, rejected }: SettledResultsGroup<string> = _.groupBy(results, (value) => {
     const { status } = value;
     if (status === 'fulfilled') {
@@ -152,6 +156,6 @@ export default async function autoTopUpTask(job: Job) {
 
   consola.log(`Failed to top off ${successes.length} recipients`);
   _.forEach(errors, (error) => {
-    consola.error(error);
+    consola.error(error, VError.info(error));
   });
 }

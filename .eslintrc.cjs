@@ -28,6 +28,7 @@ module.exports = {
             extensions: ['.js', '.jsx', '.ts', '.tsx'],
           },
         },
+        'import/internal-regex': '^@lit-protocol/',
         'import/parsers': {
           '@typescript-eslint/parser': ['.ts', '.tsx'],
         },

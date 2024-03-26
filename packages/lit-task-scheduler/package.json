@@ -23,11 +23,13 @@
     "clean": "pnpm exec rm -Rf node_modules dist",
     "stub": "pnpm unbuild --stub",
     "test": "pnpm mocha",
-    "start": "pnpm stub && pnpm dotenvx run -- node dist/bin/start.mjs"
+    "dev": "pnpm -r build && pnpm dotenvx run -- node dist/bin/start.mjs",
+    "start": "pnpm -r build && pnpm dotenvx run -- node dist/bin/start.mjs"
   },
   "dependencies": {
     "@hokify/agenda": "^6.3.0",
     "consola": "^3.2.3",
+    "lit-task-auto-top-up": "workspace:*",
     "lodash": "^4.17.21",
     "zod": "^3.22.4"
   },

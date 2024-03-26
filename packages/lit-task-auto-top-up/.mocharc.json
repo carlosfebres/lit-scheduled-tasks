@@ -1,0 +1,6 @@
+{
+  "require": ["tsx"],
+  "extensions": ["ts", "tsx"],
+  "spec": ["tests/**/*.ts"],
+  "watch-files": ["src", "tests/**/*.ts"]
+}

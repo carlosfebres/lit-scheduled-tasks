@@ -1,16 +1,29 @@
+import getLitContractsInstance from './getLitContracts';
 import { toErrorWithMessage } from '../errors';
 import MintCapacityTokenFailure from '../errors/MintCapacityTokenFailure';
-import getLitContractsInstance from '../getLitContractsInstanceSingleton';
+import { RecipientDetail } from '../types/types';
 
-export default async function mintCapacityCreditNFT({ recipientAddress }: { recipientAddress: string }) {
+export default async function mintCapacityCreditNFT({
+  recipientDetail,
+}: {
+  recipientDetail: RecipientDetail;
+}) {
   const litContracts = getLitContractsInstance();
+
+  const {
+    daysUntilExpires,
+    recipientAddress,
+    requestsPerDay,
+    requestsPerKilosecond,
+    requestsPerSecond,
+  } = recipientDetail;
 
   try {
     const { capacityTokenIdStr } = await litContracts.mintCapacityCreditsNFT({
-      daysUntilUTCMidnightExpiration: 1,
-      requestsPerDay: 1000,
-      requestsPerKilosecond: 10,
-      requestsPerSecond: 10,
+      requestsPerDay,
+      requestsPerKilosecond,
+      requestsPerSecond,
+      daysUntilUTCMidnightExpiration: daysUntilExpires,
     });
 
     return capacityTokenIdStr;

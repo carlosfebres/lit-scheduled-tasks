@@ -1,6 +1,6 @@
 /**
- * Eslint config applies to all packages - except each package must define mocha-specific overrides due to complexity in
- * identifying dependencies and their sources from parent package.json files
+ * Eslint config applies to all packages - except each package must define mocha-specific overrides
+ * due to complexity in identifying dependencies and their sources from parent package.json files
  */
 module.exports = {
   root: true,
@@ -46,7 +46,14 @@ module.exports = {
               caseInsensitive: true,
             },
             'newlines-between': 'always',
-            groups: ['builtin', 'external', 'internal', ['sibling', 'parent', 'index'], 'object', 'type'],
+            groups: [
+              'builtin',
+              'external',
+              'internal',
+              ['sibling', 'parent', 'index'],
+              'object',
+              'type',
+            ],
           },
         ],
         'typescript-sort-keys/interface': 'error',

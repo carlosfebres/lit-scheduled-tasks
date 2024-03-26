@@ -1,16 +1,19 @@
-import getConfigSingleton from '../config/getConfigSingleton';
+import getConfig from './getConfig';
+import getLitContractsInstance from './getLitContracts';
 import { toErrorWithMessage } from '../errors';
 import TransferCapacityTokenFailure from '../errors/TransferCapacityTokenFailure';
-import getLitContractsInstance from '../getLitContractsInstanceSingleton';
 import { TaskResult } from '../types/types';
 
-export default async function transferCapacityTokenNFT({ capacityTokenIdStr, recipientAddress }: TaskResult) {
+export default async function transferCapacityTokenNFT({
+  capacityTokenIdStr,
+  recipientAddress,
+}: TaskResult) {
   try {
     const litContracts = getLitContractsInstance();
-    const { FAUCET_ADDRESS } = getConfigSingleton();
+    const { NFT_MINTER_ADDRESS } = getConfig();
 
     await litContracts.rateLimitNftContractUtils.write.transfer({
-      fromAddress: FAUCET_ADDRESS,
+      fromAddress: NFT_MINTER_ADDRESS,
       RLITokenAddress: capacityTokenIdStr,
       toAddress: recipientAddress,
     });

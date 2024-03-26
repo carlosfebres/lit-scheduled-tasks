@@ -1,3 +1,5 @@
+// awaity.d.ts
+
 /* eslint-disable import/prefer-default-export */
 type Resolvable<R> = R | PromiseLike<R>;
 type IterateFunction<T, R> = (item: T, index: number, arrayLength: number) => Resolvable<R>;

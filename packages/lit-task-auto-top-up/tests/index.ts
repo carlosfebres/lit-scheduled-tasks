@@ -1,15 +1,16 @@
 import { expect } from 'chai';
 
-import Config, { DEFAULT_RECIPIENT_LIST_URL } from '../src/config/Config';
+import Config from '../src/Classes/Config';
+import { DEFAULT_RECIPIENT_LIST_URL } from '../src/constants';
 
-const FAUCET_ADDRESS = '123456789012345678901234567890123';
+const NFT_MINTER_ADDRESS = '123456789012345678901234567890123';
 const NFT_MINTER_KEY = '123456789012345678901234567890123';
 
-const VALID_CONFIG = { FAUCET_ADDRESS, NFT_MINTER_KEY };
+const VALID_CONFIG = { NFT_MINTER_ADDRESS, NFT_MINTER_KEY };
 describe('Configuration', () => {
   describe('Required properties', () => {
     it('should require minter PK and faucet address to be provided', () => {
-      expect(() => new Config({ FAUCET_ADDRESS, NFT_MINTER_KEY })).not.throw();
+      expect(() => new Config({ NFT_MINTER_ADDRESS, NFT_MINTER_KEY })).not.throw();
       expect(() => new Config({})).throw();
     });
   });

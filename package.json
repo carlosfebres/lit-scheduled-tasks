@@ -15,11 +15,13 @@
   "author": "Daryl Collins <daryl@darylcollins.com>",
   "license": "ISC",
   "devDependencies": {
+    "@dotenvx/dotenvx": "^0.26.0",
     "@tsconfig/node18": "^18.2.2",
     "@types/chai": "^4.3.14",
     "@types/lodash": "^4.17.0",
     "@types/mocha": "^10.0.6",
     "@types/node": "^20.11.30",
+    "@types/verror": "^1.10.10",
     "@typescript-eslint/eslint-plugin": "^7.3.1",
     "@typescript-eslint/parser": "^7.3.1",
     "chai": "^5.1.0",

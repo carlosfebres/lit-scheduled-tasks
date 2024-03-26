@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "description": "",
   "type": "module",
+  "packageManager": "pnpm@8.15.5",
   "exports": {
     ".": {
       "import": {
@@ -36,10 +37,10 @@
     "awaity": "^1.0.0",
     "consola": "^3.2.3",
     "lodash": "^4.17.21",
-    "verror": "^1.10.1"
+    "verror": "^1.10.1",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@types/verror": "^1.10.10",
     "chai": "^5.1.0"
   }
 }

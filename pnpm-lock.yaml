@@ -15,6 +15,9 @@ importers:
         specifier: ^4.17.21
         version: 4.17.21
     devDependencies:
+      '@dotenvx/dotenvx':
+        specifier: ^0.26.0
+        version: 0.26.0
       '@tsconfig/node18':
         specifier: ^18.2.2
         version: 18.2.2
@@ -30,6 +33,9 @@ importers:
       '@types/node':
         specifier: ^20.11.30
         version: 20.11.30
+      '@types/verror':
+        specifier: ^1.10.10
+        version: 1.10.10
       '@typescript-eslint/eslint-plugin':
         specifier: ^7.3.1
         version: 7.3.1(@typescript-eslint/parser@7.3.1)(eslint@8.57.0)(typescript@5.4.3)
@@ -105,10 +111,10 @@ importers:
       verror:
         specifier: ^1.10.1
         version: 1.10.1
+      zod:
+        specifier: ^3.22.4
+        version: 3.22.4
     devDependencies:
-      '@types/verror':
-        specifier: ^1.10.10
-        version: 1.10.10
       chai:
         specifier: ^5.1.0
         version: 5.1.0
@@ -131,9 +137,6 @@ importers:
         specifier: ^3.22.4
         version: 3.22.4
     devDependencies:
-      '@dotenvx/dotenvx':
-        specifier: ^0.26.0
-        version: 0.26.0
       chai:
         specifier: ^5.1.0
         version: 5.1.0

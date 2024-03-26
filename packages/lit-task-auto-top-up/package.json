@@ -23,16 +23,12 @@
     "dist"
   ],
   "scripts": {
-    "stub-fix": "if [[ \"$OSTYPE\" == \"darwin\"* ]]; then pnpm run stub-fix:darwin; else pnpm run stub-fix:linux; fi",
-    "stub-fix:darwin": "find ./dist -type f -name \"*.ts\" -exec sed -i '' 's/\";$/.js\"/g' {} \\;",
-    "stub-fix:linux": "find ./dist -type f -name \"*.ts\" -exec sed -i 's/\";$/.js\"/g' {} \\;",
     "build": "pnpm unbuild",
     "lint": "pnpm eslint .",
     "clean": "pnpm exec rm -Rf node_modules dist",
-    "stuborig": "pnpm unbuild --stub",
-    "stub": "pnpm unbuild --stub && pnpm run stub-fix",
+    "stub": "pnpm unbuild --stub",
     "test": "pnpm mocha",
-    "dev": "pnpm stub && echo 'Stubbed the package for local use! Carry on.'"
+    "dev": "pnpm -r build && echo 'Built the package for local use! Carry on.'"
   },
   "dependencies": {
     "@hokify/agenda": "^6.3.0",

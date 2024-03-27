@@ -12,20 +12,12 @@ export default async function mintCapacityCreditNFT({
 }) {
   const litContracts = await getLitContractsInstance();
 
-  const {
-    daysUntilExpires,
-    recipientAddress,
-    requestsPerDay,
-    requestsPerKilosecond,
-    requestsPerSecond,
-  } = recipientDetail;
+  const { daysUntilExpires, recipientAddress, requestsPerSecond } = recipientDetail;
 
   try {
     consola.log('Minting capacity token', recipientDetail);
 
     const { capacityTokenIdStr } = await litContracts.mintCapacityCreditsNFT({
-      requestsPerDay,
-      requestsPerKilosecond,
       requestsPerSecond,
       daysUntilUTCMidnightExpiration: daysUntilExpires,
     });
@@ -39,8 +31,6 @@ export default async function mintCapacityCreditNFT({
         cause: err,
         info: {
           recipientAddress,
-          requestsPerDay,
-          requestsPerKilosecond,
           requestsPerSecond,
           daysUntilUTCMidnightExpiration: daysUntilExpires,
         },

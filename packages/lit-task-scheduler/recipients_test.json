@@ -2,8 +2,6 @@
   {
     "recipientAddress": "0x9f32f6555a117ac137775973C6856bC52c249C80",
     "daysUntilExpires": 5,
-    "requestsPerDay": 10000,
-    "requestsPerKilosecond": 150,
     "requestsPerSecond": 5
   }
 ]

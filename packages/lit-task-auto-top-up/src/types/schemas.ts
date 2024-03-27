@@ -4,11 +4,9 @@ import { DEFAULT_RECIPIENT_LIST_URL } from '../constants';
 
 export const recipientDetailSchema = z
   .object({
-    daysUntilExpires: z.number(),
+    daysUntilExpires: z.number().default(10),
     recipientAddress: z.string(),
-    requestsPerDay: z.number(),
-    requestsPerKilosecond: z.number(),
-    requestsPerSecond: z.number(),
+    requestsPerSecond: z.number().default(10),
   })
   .required();
 export const recipientDetailsListSchema = z.array(recipientDetailSchema);

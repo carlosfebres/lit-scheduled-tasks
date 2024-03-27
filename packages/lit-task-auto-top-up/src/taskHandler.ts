@@ -1,5 +1,5 @@
 import { Job } from '@hokify/agenda';
-import { mapLimit } from 'awaity';
+import awaity from 'awaity';
 import consola from 'consola';
 
 import fetchRecipientList from './actions/getRecipientList';
@@ -7,6 +7,8 @@ import mintCapacityCreditNFT from './actions/mintCapacityCreditNFT';
 import transferCapacityTokenNFT from './actions/transferCapacityTokenNFT';
 import { printTaskResultsAndFailures, tryTouchTask } from './taskHelpers';
 import { TaskResult, RecipientDetail } from './types/types';
+
+const { mapLimit } = awaity;
 
 export async function handleRecipient({
   recipientDetail,

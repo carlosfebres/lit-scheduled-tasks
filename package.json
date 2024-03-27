@@ -8,7 +8,9 @@
     "build": "pnpm -r run build",
     "lint": "pnpm -r run lint",
     "clean": "pnpm exec rm -Rf node_modules && pnpm --parallel -r run clean",
-    "test": "pnpm -r run test"
+    "test": "pnpm -r run test",
+    "dev": "pnpm -r build && pnpm --filter=lit-task-scheduler run dev",
+    "start": "pnpm -r build && pnpm --filter=lit-task-scheduler run start"
   },
   "packageManager": "pnpm@8.15.5",
   "keywords": [],

@@ -23,8 +23,8 @@
     "clean": "pnpm exec rm -Rf node_modules dist",
     "stub": "pnpm unbuild --stub",
     "test": "pnpm mocha",
-    "dev": "pnpm -r build && pnpm dotenvx run -- node dist/bin/start.mjs",
-    "start": "pnpm -r build && pnpm dotenvx run -- node dist/bin/start.mjs"
+    "dev": "echo 'This will use stub when #371 is fixed.' && pnpm dotenvx run -- node dist/bin/start.mjs",
+    "start": "echo 'Production start! Skipping dotenvx.' && pnpm node dist/bin/start.mjs"
   },
   "dependencies": {
     "@hokify/agenda": "^6.3.0",

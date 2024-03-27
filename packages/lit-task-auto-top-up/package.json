@@ -29,7 +29,7 @@
     "clean": "pnpm exec rm -Rf node_modules dist",
     "stub": "pnpm unbuild --stub",
     "test": "pnpm mocha",
-    "dev": "pnpm -r build && echo 'Built the package for local use! Carry on.'"
+    "dev": "echo 'This will use stub when #371 is fixed.' && pnpm build && echo 'Built the package for local use! Carry on.'"
   },
   "dependencies": {
     "@hokify/agenda": "^6.3.0",

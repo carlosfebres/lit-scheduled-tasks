@@ -24,7 +24,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "pnpm unbuild",
+    "build": "pnpm unbuild --sourcemap",
     "lint": "pnpm eslint .",
     "clean": "pnpm exec rm -Rf node_modules dist",
     "stub": "pnpm unbuild --stub",

@@ -18,6 +18,6 @@ export default function createTaskClient({ dbConfig }: CreateTaskClientConfig) {
       },
     },
     ensureIndex: true,
-    processEvery: 60000,
+    processEvery: 5000,
   });
 }

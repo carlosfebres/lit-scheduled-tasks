@@ -36,6 +36,8 @@ export default class RecipientList {
   async fetchRecipientList(): Promise<RecipientDetail[]> {
     const { RECIPIENT_LIST_URL } = this.config;
 
+    consola.log('Fetching recipients list', { RECIPIENT_LIST_URL });
+
     try {
       const res = await fetch(RECIPIENT_LIST_URL);
       const list = await res.json();

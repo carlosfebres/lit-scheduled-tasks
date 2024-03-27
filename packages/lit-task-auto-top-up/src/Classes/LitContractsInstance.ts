@@ -5,9 +5,19 @@ import { EnvConfig } from '../types/types';
 export default class LitContractsInstance {
   private readonly contractsInstance: LitContracts;
 
+  private isConnected: boolean = false;
+
   constructor({ config }: { config: EnvConfig }) {
     const { NFT_MINTER_KEY } = config;
     this.contractsInstance = new LitContracts({ privateKey: NFT_MINTER_KEY });
+  }
+
+  async connect(): Promise<boolean> {
+    if (!this.isConnected) {
+      return this.contractsInstance.connect().then(() => true);
+    }
+
+    return true;
   }
 
   get litContracts(): LitContracts {

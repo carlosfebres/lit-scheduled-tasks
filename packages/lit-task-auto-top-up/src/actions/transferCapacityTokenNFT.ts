@@ -1,5 +1,3 @@
-import consola from 'consola';
-
 import getConfig from './getConfig';
 import getLitContractsInstance from './getLitContracts';
 import { toErrorWithMessage } from '../errors';
@@ -14,9 +12,12 @@ export default async function transferCapacityTokenNFT({
 }) {
   try {
     const litContracts = await getLitContractsInstance();
-    const { NFT_MINTER_ADDRESS } = getConfig();
+    const {
+      envConfig: { NFT_MINTER_ADDRESS },
+      logger,
+    } = getConfig();
 
-    consola.log('Transferring capacity token', { capacityTokenIdStr, recipientAddress });
+    logger.log('Transferring capacity token', { capacityTokenIdStr, recipientAddress });
 
     await litContracts.rateLimitNftContractUtils.write.transfer({
       fromAddress: NFT_MINTER_ADDRESS,

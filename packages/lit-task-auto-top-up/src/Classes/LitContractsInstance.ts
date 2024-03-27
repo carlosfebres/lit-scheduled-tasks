@@ -1,14 +1,18 @@
 import { LitContracts } from '@lit-protocol/contracts-sdk';
 
-import { EnvConfig } from '../types/types';
+import { Config } from '../types/types';
 
 export default class LitContractsInstance {
   private readonly contractsInstance: LitContracts;
 
   private isConnected: boolean = false;
 
-  constructor({ config }: { config: EnvConfig }) {
-    const { LIT_NETWORK, NFT_MINTER_KEY } = config;
+  private connectHandle: Promise<boolean> | null = null;
+
+  constructor(config: Config) {
+    const {
+      envConfig: { LIT_NETWORK, NFT_MINTER_KEY },
+    } = config;
     this.contractsInstance = new LitContracts({
       debug: true,
       network: LIT_NETWORK,
@@ -18,7 +22,27 @@ export default class LitContractsInstance {
 
   async connect(): Promise<boolean> {
     if (!this.isConnected) {
-      return this.contractsInstance.connect().then(() => true);
+      // Coalesce concurrent calls
+      if (this.connectHandle) {
+        return this.connectHandle;
+      }
+
+      // Stash a handle so concurrent calls to connect are coaelesced into 1
+      this.connectHandle = this.contractsInstance.connect().then(() => true);
+
+      try {
+        // Don't return until we know the result of pending connect attempt
+        await this.connectHandle;
+        this.isConnected = true;
+      } catch (e) {
+        // We allow multiple calls to (retries!) to `connect()` even in case where one succeeded
+        // if `isConnected` is false (e.g. a prior attempt failed)
+        this.isConnected = false;
+        throw e;
+      } finally {
+        this.connectHandle = null;
+      }
+      return this.isConnected;
     }
 
     return true;

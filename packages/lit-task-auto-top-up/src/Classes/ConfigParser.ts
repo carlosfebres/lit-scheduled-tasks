@@ -1,7 +1,7 @@
-import consola from 'consola';
+import consola, { ConsolaInstance } from 'consola';
 
 import { envConfigSchema } from '../types/schemas';
-import { EnvConfig } from '../types/types';
+import { EnvConfig, Config } from '../types/types';
 
 /**
  * Class that provides parsing of `process.env` using `zod` Env is only parsed during object
@@ -9,21 +9,23 @@ import { EnvConfig } from '../types/types';
  * some reason you change `process.env`, or to test multiple env configurations in the same process
  * you'll need a new Config instance
  */
-export default class Config {
+export default class ConfigParser {
   private readonly parsedConfig: EnvConfig;
+
+  private logger: ConsolaInstance = consola.withTag('lit-task-auto-top-up');
 
   constructor(env: object = process.env) {
     this.parsedConfig = envConfigSchema.parse(env);
 
     const { LIT_NETWORK, NFT_MINTER_ADDRESS, RECIPIENT_LIST_URL } = this.parsedConfig;
-    consola.log('Env configuration loaded', {
+    this.logger.log('Env configuration loaded', {
       LIT_NETWORK,
       NFT_MINTER_ADDRESS,
       RECIPIENT_LIST_URL,
     });
   }
 
-  get config(): EnvConfig {
-    return this.parsedConfig;
+  get config(): Config {
+    return { envConfig: this.parsedConfig, logger: this.logger };
   }
 }

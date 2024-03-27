@@ -1,5 +1,4 @@
-import consola from 'consola';
-
+import getConfig from './getConfig';
 import getLitContractsInstance from './getLitContracts';
 import { toErrorWithMessage } from '../errors';
 import MintCapacityTokenFailure from '../errors/MintCapacityTokenFailure';
@@ -11,11 +10,12 @@ export default async function mintCapacityCreditNFT({
   recipientDetail: RecipientDetail;
 }) {
   const litContracts = await getLitContractsInstance();
+  const { logger } = getConfig();
 
   const { daysUntilExpires, recipientAddress, requestsPerSecond } = recipientDetail;
 
   try {
-    consola.log('Minting capacity token', recipientDetail);
+    logger.log('Minting capacity token', recipientDetail);
 
     const { capacityTokenIdStr } = await litContracts.mintCapacityCreditsNFT({
       requestsPerSecond,

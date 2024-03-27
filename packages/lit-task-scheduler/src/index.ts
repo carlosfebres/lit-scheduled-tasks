@@ -1,4 +1,4 @@
-import { getConfigFromEnv } from './config';
+import getConfig from './actions/getConfig';
 import createTaskClient from './createTaskClient';
 
-export { createTaskClient, getConfigFromEnv };
+export { createTaskClient, getConfig };

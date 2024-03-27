@@ -9,8 +9,13 @@ import getConfig from './getConfig';
 import RecipientList from '../Classes/RecipientList';
 import { RecipientDetail } from '../types/types';
 
-const recipientListInstance = new RecipientList(getConfig());
+let recipientListInstance: RecipientList | null;
 
-export default async function getRecipients(): Promise<RecipientDetail[]> {
-  return recipientListInstance.fetchRecipientList();
+export default async function getRecipientList(): Promise<RecipientDetail[]> {
+  if (recipientListInstance) {
+    return recipientListInstance.getRecipientList();
+  }
+  recipientListInstance = new RecipientList(getConfig());
+
+  return recipientListInstance.getRecipientList();
 }

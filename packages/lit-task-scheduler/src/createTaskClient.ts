@@ -1,13 +1,11 @@
 import { Agenda } from '@hokify/agenda';
 
-import { EnvConfig } from './config';
+import { Config } from './types/types';
 
-interface CreateTaskClientConfig {
-  dbConfig: EnvConfig;
-}
-
-export default function createTaskClient({ dbConfig }: CreateTaskClientConfig) {
-  const { MONGO_DB_NAME, MONGO_PASSWORD, MONGO_SERVER, MONGO_USER } = dbConfig;
+export default function createTaskClient({ config }: { config: Config }) {
+  const {
+    envConfig: { MONGO_DB_NAME, MONGO_PASSWORD, MONGO_SERVER, MONGO_USER },
+  } = config;
 
   return new Agenda({
     db: {

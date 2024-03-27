@@ -1,7 +1,7 @@
 import { Job } from '@hokify/agenda';
 import consola from 'consola';
 import _ from 'lodash';
-import VError from 'verror';
+import VError, { MultiError } from 'verror';
 
 import { TaskResult } from './types/types';
 
@@ -25,9 +25,9 @@ export function printTaskResultsAndFailures(results: PromiseSettledResult<TaskRe
     consola.error(error, JSON.stringify(VError.info(error), null, 2));
   });
 
-  if (successes.length > 0 && successes.length === errors.length) {
+  if (successes.length > 1 && successes.length === errors.length) {
     // If every single attempt to mint failed, we should assume something pretty bad is wrong and make the job fail entirely
-    throw VError.errorFromList(errors);
+    throw VError.errorFromList(errors) as MultiError;
   }
 }
 

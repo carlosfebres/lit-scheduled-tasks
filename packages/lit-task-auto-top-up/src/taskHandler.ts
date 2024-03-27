@@ -48,7 +48,7 @@ export async function handleTask(task: Job) {
     printTaskResultsAndFailures(results);
   } catch (e) {
     const err = toErrorWithMessage(e);
-    console.error('CRITICAL ERROR', JSON.stringify(VError.info(err), null, 2));
+    consola.error('CRITICAL ERROR', JSON.stringify(VError.info(err), null, 2));
 
     // Re-throw so the job is retried by the task worker
     throw err;

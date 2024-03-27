@@ -1,3 +1,5 @@
+import consola from 'consola';
+
 import { envConfigSchema } from '../types/schemas';
 import { EnvConfig } from '../types/types';
 
@@ -12,6 +14,13 @@ export default class Config {
 
   constructor(env: object = process.env) {
     this.parsedConfig = envConfigSchema.parse(env);
+
+    const { LIT_NETWORK, NFT_MINTER_ADDRESS, RECIPIENT_LIST_URL } = this.parsedConfig;
+    consola.log('Env configuration loaded', {
+      LIT_NETWORK,
+      NFT_MINTER_ADDRESS,
+      RECIPIENT_LIST_URL,
+    });
   }
 
   get config(): EnvConfig {

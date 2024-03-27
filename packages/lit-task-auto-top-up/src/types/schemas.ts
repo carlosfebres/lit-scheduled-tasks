@@ -14,7 +14,10 @@ export const requiredConfigSchema = {
   NFT_MINTER_ADDRESS: z.string().min(32),
   NFT_MINTER_KEY: z.string().min(32),
 };
+
+const LIT_NETWORKS = z.enum(['cayenne', 'custom', 'manzano', 'habanero']);
 export const optionalConfigSchema = {
+  LIT_NETWORK: LIT_NETWORKS.default('cayenne'),
   RECIPIENT_LIST_URL: z.string().default(DEFAULT_RECIPIENT_LIST_URL),
 };
 export const envConfigSchema = z.intersection(

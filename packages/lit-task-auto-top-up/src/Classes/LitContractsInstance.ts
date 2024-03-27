@@ -8,8 +8,12 @@ export default class LitContractsInstance {
   private isConnected: boolean = false;
 
   constructor({ config }: { config: EnvConfig }) {
-    const { NFT_MINTER_KEY } = config;
-    this.contractsInstance = new LitContracts({ privateKey: NFT_MINTER_KEY });
+    const { LIT_NETWORK, NFT_MINTER_KEY } = config;
+    this.contractsInstance = new LitContracts({
+      debug: true,
+      network: LIT_NETWORK,
+      privateKey: NFT_MINTER_KEY,
+    });
   }
 
   async connect(): Promise<boolean> {

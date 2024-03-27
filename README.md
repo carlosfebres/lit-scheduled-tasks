@@ -16,7 +16,7 @@ pnpm install && pnpm build
 
 #### For local development:
 
-Note that local development uses `dotenvx` to load necessary environment vars from a `.env` file which must be located in the [lit-task-scheduler](packages/lit-task-scheduler) directory. See [example .env file](packages/lit-task-scheduler/.env.example)
+Note that local development uses `dotenvx` to load necessary environment vars from a `.env` file which must be located in the [lit-task-client](packages/lit-task-client) directory. See [example .env file](packages/lit-task-client/.env.example)
 
 ```zsh
 pnpm dev
@@ -24,7 +24,7 @@ pnpm dev
 
 #### For production:
 
-Note that all environment variables for [lit-task-scheduler](packages/lit-task-scheduler/README.md) must be defined in the host environment.
+Note that all environment variables for [lit-task-client](packages/lit-task-client/README.md) must be defined in the host environment.
 
 ```zsh
 pnpm start
@@ -32,10 +32,10 @@ pnpm start
 
 ## 📦 Packages
 
-| Package              | Purpose                                                               |
-| -------------------- | --------------------------------------------------------------------- |
-| lit-task-scheduler   | Initializes job schedules and executes tasks at scheduled intervals   |
-| lit-task-auto-top-up | Mints capacity credit NFTs for a provided list of recipient addresses |
+| Package              | Purpose                                                                                                        |
+| -------------------- |----------------------------------------------------------------------------------------------------------------|
+| lit-task-client      | Provides methods to load and validate mongo credentials from env type-safely and create a task client instance |
+| lit-task-auto-top-up | Task to mints capacity credit NFTs for a list of recipient addresses defined in JSON at a configured URL       |
 
 ## 💻 Development
 

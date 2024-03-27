@@ -7,13 +7,14 @@
   "engines": {
     "node": "^18.19.1"
   },
+  "type": "module",
   "scripts": {
-    "build": "pnpm -r run build",
-    "lint": "pnpm -r run lint",
-    "clean": "pnpm exec rm -Rf node_modules && pnpm --parallel -r run clean",
+    "build": "pnpm -r run build && pnpm tsc",
+    "lint": "pnpm eslint . && pnpm --parallel -r run lint",
+    "clean": "pnpm exec rm -Rf node_modules dist && pnpm --parallel -r run clean",
     "test": "pnpm -r run test",
-    "dev": "pnpm -r build && pnpm --filter=lit-task-scheduler run dev",
-    "start": "pnpm -r build && pnpm --filter=lit-task-scheduler run start",
+    "dev": "DEBUG=agenda:* pnpm build && pnpm dotenvx run -- node ./dist/worker.js",
+    "start": "pnpm build && node ./dist/worker.js",
     "prepare": "husky"
   },
   "packageManager": "pnpm@8.15.5",
@@ -50,6 +51,8 @@
     "unbuild": "^2.0.0"
   },
   "dependencies": {
+    "lit-task-auto-top-up": "workspace:*",
+    "lit-task-client": "workspace:*",
     "consola": "^3.2.3",
     "lodash": "^4.17.21"
   }

@@ -1,3 +1,3 @@
 import VError from 'verror';
 
-export default class FetchRecipientListFailure extends VError {}
+export class FetchRecipientListFailure extends VError {}

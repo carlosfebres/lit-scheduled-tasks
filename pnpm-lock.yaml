@@ -11,6 +11,12 @@ importers:
       consola:
         specifier: ^3.2.3
         version: 3.2.3
+      lit-task-auto-top-up:
+        specifier: workspace:*
+        version: link:packages/lit-task-auto-top-up
+      lit-task-client:
+        specifier: workspace:*
+        version: link:packages/lit-task-client
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
@@ -125,7 +131,7 @@ importers:
         specifier: ^5.1.0
         version: 5.1.0
 
-  packages/lit-task-scheduler:
+  packages/lit-task-client:
     dependencies:
       '@hokify/agenda':
         specifier: ^6.3.0

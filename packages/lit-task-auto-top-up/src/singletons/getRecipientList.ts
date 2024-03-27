@@ -5,13 +5,13 @@
  * We maintain an instance here to facilitate persisting the 'last known good' list of recipients
  * that we have parsed
  */
-import getConfig from './getConfig';
-import RecipientList from '../Classes/RecipientList';
+import { getConfig } from './getConfig';
+import { RecipientList } from '../Classes/RecipientList';
 import { RecipientDetail } from '../types/types';
 
 let recipientListInstance: RecipientList | null;
 
-export default async function getRecipientList(): Promise<RecipientDetail[]> {
+export async function getRecipientList(): Promise<RecipientDetail[]> {
   if (recipientListInstance) {
     return recipientListInstance.getRecipientList();
   }

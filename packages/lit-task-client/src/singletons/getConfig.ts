@@ -7,11 +7,11 @@
  * To test environment loading, use the Config class directly and pass in env objects as you
  * construct instances of it.
  */
-import ConfigParser from '../Classes/ConfigParser';
+import { ConfigParser } from '../Classes/ConfigParser';
 
 let configInstance: ConfigParser | null = null;
 
-export default function getConfig() {
+export function getConfig() {
   if (configInstance) {
     return configInstance.config;
   }

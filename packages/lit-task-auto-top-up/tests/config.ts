@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import _ from 'lodash';
 
-import ConfigParser from '../src/Classes/ConfigParser';
+import { ConfigParser } from '../src/Classes/ConfigParser';
 import { DEFAULT_RECIPIENT_LIST_URL } from '../src/constants';
 import { EnvConfig } from '../src/types/types';
 
@@ -45,7 +45,9 @@ describe('Configuration', () => {
 
     it('should provide our default source URL when not defined in env', () => {
       const { config } = new ConfigParser(_.omit(COMPLETE_CONFIG, ['RECIPIENT_LIST_URL']));
-      expect(config).property('RECIPIENT_LIST_URL', DEFAULT_RECIPIENT_LIST_URL);
+      expect(config)
+        .property('envConfig')
+        .property('RECIPIENT_LIST_URL', DEFAULT_RECIPIENT_LIST_URL);
     });
   });
 });

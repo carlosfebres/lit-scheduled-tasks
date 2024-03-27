@@ -2,7 +2,7 @@ import { LitContracts } from '@lit-protocol/contracts-sdk';
 
 import { Config } from '../types/types';
 
-export default class LitContractsInstance {
+export class LitContractsInstance {
   private readonly contractsInstance: LitContracts;
 
   private isConnected: boolean = false;

@@ -1,2 +1,3 @@
 export { taskName } from './constants';
-export { handleTask } from './taskHandler';
+export { TaskHandler } from './Classes/TaskHandler';
+export { getConfig } from './singletons/getConfig';

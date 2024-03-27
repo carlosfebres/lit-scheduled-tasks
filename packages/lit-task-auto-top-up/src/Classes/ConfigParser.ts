@@ -9,7 +9,7 @@ import { EnvConfig, Config } from '../types/types';
  * some reason you change `process.env`, or to test multiple env configurations in the same process
  * you'll need a new Config instance
  */
-export default class ConfigParser {
+export class ConfigParser {
   private readonly parsedConfig: EnvConfig;
 
   private logger: ConsolaInstance = consola.withTag('lit-task-auto-top-up');

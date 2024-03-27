@@ -1,3 +1,3 @@
 import VError from 'verror';
 
-export default class TransferCapacityTokenFailure extends VError {}
+export class TransferCapacityTokenFailure extends VError {}

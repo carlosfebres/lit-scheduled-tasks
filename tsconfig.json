@@ -1,8 +1,10 @@
 {
   "extends": "@tsconfig/node18/tsconfig.json",
+  "include": ["./worker/*"],
   "compilerOptions": {
     "module": "es2015",
     "moduleResolution": "Bundler",
-    "strict": true
+    "strict": true,
+    "outDir": "./dist"
   }
 }

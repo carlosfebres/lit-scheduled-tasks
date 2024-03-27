@@ -36,6 +36,8 @@ module.exports = {
       },
       rules: {
         'no-console': 'error',
+        'import/prefer-default-export': ['off'],
+        'import/no-default-export': ['error'],
         'import/no-relative-packages': ['error'],
         'import/no-duplicates': ['error'],
         'import/no-unresolved': ['error'],
@@ -72,6 +74,7 @@ module.exports = {
           },
         ],
         'sort-destructure-keys/sort-destructure-keys': ['error', { caseSensitive: false }],
+        'class-methods-use-this': ['off'],
       },
     },
   ],

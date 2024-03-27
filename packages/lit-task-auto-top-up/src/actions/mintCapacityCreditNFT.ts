@@ -1,10 +1,10 @@
-import getConfig from './getConfig';
-import getLitContractsInstance from './getLitContracts';
 import { toErrorWithMessage } from '../errors';
-import MintCapacityTokenFailure from '../errors/MintCapacityTokenFailure';
+import { MintCapacityTokenFailure } from '../errors/MintCapacityTokenFailure';
+import { getConfig } from '../singletons/getConfig';
+import { getLitContractsInstance } from '../singletons/getLitContracts';
 import { RecipientDetail } from '../types/types';
 
-export default async function mintCapacityCreditNFT({
+export async function mintCapacityCreditNFT({
   recipientDetail,
 }: {
   recipientDetail: RecipientDetail;

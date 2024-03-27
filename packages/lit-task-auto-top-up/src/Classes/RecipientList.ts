@@ -1,11 +1,11 @@
 import { ConsolaInstance } from 'consola';
 
 import { toErrorWithMessage } from '../errors';
-import FetchRecipientListFailure from '../errors/FetchRecipientListFailure';
+import { FetchRecipientListFailure } from '../errors/FetchRecipientListFailure';
 import { recipientDetailsListSchema } from '../types/schemas';
 import { EnvConfig, RecipientDetail, Config } from '../types/types';
 
-export default class RecipientList {
+export class RecipientList {
   private recipientList: RecipientDetail[] = [];
 
   private readonly envConfig: EnvConfig;

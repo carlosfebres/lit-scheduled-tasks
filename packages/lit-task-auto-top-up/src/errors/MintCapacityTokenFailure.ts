@@ -1,3 +1,3 @@
 import VError from 'verror';
 
-export default class MintCapacityTokenFailure extends VError {}
+export class MintCapacityTokenFailure extends VError {}

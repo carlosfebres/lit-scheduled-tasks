@@ -1,9 +1,9 @@
-import getConfig from './getConfig';
-import getLitContractsInstance from './getLitContracts';
 import { toErrorWithMessage } from '../errors';
-import TransferCapacityTokenFailure from '../errors/TransferCapacityTokenFailure';
+import { TransferCapacityTokenFailure } from '../errors/TransferCapacityTokenFailure';
+import { getConfig } from '../singletons/getConfig';
+import { getLitContractsInstance } from '../singletons/getLitContracts';
 
-export default async function transferCapacityTokenNFT({
+export async function transferCapacityTokenNFT({
   capacityTokenIdStr,
   recipientAddress,
 }: {

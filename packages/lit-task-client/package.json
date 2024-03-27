@@ -1,5 +1,5 @@
 {
-  "name": "lit-task-scheduler",
+  "name": "lit-task-client",
   "private": true,
   "version": "1.0.0",
   "description": "",
@@ -10,7 +10,6 @@
       "require": "./dist/index.cjs"
     }
   },
-  "bin": "./dist/bin/start.cjs",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",

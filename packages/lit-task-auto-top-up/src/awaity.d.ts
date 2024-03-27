@@ -35,7 +35,10 @@ declare module 'awaity' {
     mapper: IterateFunction<R, U>,
     concurrent?: number
   ): Promise<Awaited<U>[]>;
-  export function mapSeries<T>(values: Iterable<T | PromiseLike<T>>): Promise<Awaited<T>[]>;
+  export function mapSeries<R, U>(
+    values: Resolvable<Iterable<Resolvable<R>>>,
+    mapper: IterateFunction<R, U>
+  ): Promise<Awaited<U>[]>;
   export function reduce<R, U>(
     values: Resolvable<Iterable<Resolvable<R>>>,
     reducer: (total: U, current: R, index: number, arrayLength: number) => Resolvable<U>,

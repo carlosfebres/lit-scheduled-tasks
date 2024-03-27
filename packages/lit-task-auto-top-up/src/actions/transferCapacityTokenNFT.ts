@@ -4,12 +4,14 @@ import getConfig from './getConfig';
 import getLitContractsInstance from './getLitContracts';
 import { toErrorWithMessage } from '../errors';
 import TransferCapacityTokenFailure from '../errors/TransferCapacityTokenFailure';
-import { TaskResult } from '../types/types';
 
 export default async function transferCapacityTokenNFT({
   capacityTokenIdStr,
   recipientAddress,
-}: TaskResult) {
+}: {
+  capacityTokenIdStr: string;
+  recipientAddress: string;
+}) {
   try {
     const litContracts = await getLitContractsInstance();
     const { NFT_MINTER_ADDRESS } = getConfig();

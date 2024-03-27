@@ -39,6 +39,10 @@ export default async function mintCapacityCreditNFT({
         cause: err,
         info: {
           recipientAddress,
+          requestsPerDay,
+          requestsPerKilosecond,
+          requestsPerSecond,
+          daysUntilUTCMidnightExpiration: daysUntilExpires,
         },
         name: 'MintCapacityTokenFailure',
       },

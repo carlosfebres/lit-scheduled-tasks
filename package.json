@@ -4,6 +4,9 @@
   "version": "1.0.0",
   "description": "Scheduled tasks for LIT Protocol",
   "homepage": "https://github.com/LIT-protocol/lit-scheduled-tasks",
+  "engines": {
+    "node": "^18.19.1"
+  },
   "scripts": {
     "build": "pnpm -r run build",
     "lint": "pnpm -r run lint",

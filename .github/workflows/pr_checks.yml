@@ -1,0 +1,59 @@
+name: CI checks
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  lint:
+    name: "Lint"
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Install PNPM
+        uses: pnpm/action-setup@v2
+        with:
+          version: 6.32.9
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'pnpm'
+      - name: Install project dependencies
+        run: pnpm install
+      - name: Build packages - for Typescript workspace references
+        run: pnpm build
+      - name: Lint
+        run: pnpm lint
+  tests:
+    needs: 'lint'
+    name: 'Tests'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Install PNPM
+        uses: pnpm/action-setup@v2
+        with:
+          version: 6.32.9
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'pnpm'
+      - name: Install project dependencies
+        run: pnpm install
+      - name: Build packages - for Typescript workspace references
+        run: pnpm build
+      - name: Lint
+        run: pnpm test

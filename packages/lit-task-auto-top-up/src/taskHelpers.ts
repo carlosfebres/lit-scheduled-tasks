@@ -20,14 +20,18 @@ export function printTaskResultsAndFailures(results: PromiseSettledResult<TaskRe
     consola.log(`Minted for ${recipientAddress}`, rest);
   });
 
-  consola.log(`Failed to top off ${errors.length} recipients`);
-  _.forEach(errors, (error) => {
-    consola.error(error, JSON.stringify(VError.info(error), null, 2));
-  });
+  if (errors.length > 0) {
+    consola.log(`Failed to top off ${errors.length} recipients`);
+    _.forEach(errors, (error) => {
+      consola.error(error, JSON.stringify(VError.info(error), null, 2));
+    });
 
-  if (successes.length > 1 && successes.length === errors.length) {
-    // If every single attempt to mint failed, we should assume something pretty bad is wrong and make the job fail entirely
-    throw VError.errorFromList(errors) as MultiError;
+    if (successes.length > 1 && successes.length === errors.length) {
+      // If every single attempt to mint failed, we should assume something pretty bad is wrong and make the job fail entirely
+      throw VError.errorFromList(errors) as MultiError;
+    }
+  } else {
+    consola.log('All recipients were topped off successfully.');
   }
 }
 

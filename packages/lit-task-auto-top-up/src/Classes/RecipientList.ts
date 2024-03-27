@@ -1,6 +1,5 @@
 import consola from 'consola';
 
-import getConfig from '../actions/getConfig';
 import { toErrorWithMessage } from '../errors';
 import FetchRecipientListFailure from '../errors/FetchRecipientListFailure';
 import { recipientDetailsListSchema } from '../types/schemas';
@@ -11,8 +10,8 @@ export default class RecipientList {
 
   private readonly config: EnvConfig;
 
-  constructor() {
-    this.config = getConfig();
+  constructor(config: EnvConfig) {
+    this.config = config;
   }
 
   async getRecipientList(): Promise<RecipientDetail[]> {

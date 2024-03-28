@@ -44,7 +44,7 @@ jobs:
       - name: Install PNPM
         uses: pnpm/action-setup@v2
         with:
-          version: 6.32.9
+          version: 8.15.5
       - name: Checkout repo
         uses: actions/checkout@v4
         with:

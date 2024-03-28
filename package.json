@@ -17,7 +17,7 @@
     "start": "pnpm build && node ./dist/worker/worker.js",
     "prepare": "husky",
     "ci_validate": "node ./dist/bin/validateJSONRecipients.js",
-    "validate": "pnpm build && node ./dist/bin/validateJSONRecipients.js"
+    "validate": "pnpm tsc && node ./dist/bin/validateJSONRecipients.js"
   },
   "packageManager": "pnpm@8.15.5",
   "keywords": [],

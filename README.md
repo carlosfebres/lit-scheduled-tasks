@@ -16,7 +16,7 @@ pnpm install && pnpm build
 
 #### For local development:
 
-Note that local development uses `dotenvx` to load necessary environment vars from a `.env` file which must be located in the [lit-task-client](packages/lit-task-client) directory. See [example .env file](packages/lit-task-client/.env.example)
+Note that local development uses `dotenvx` to load necessary environment vars from a `.env` file which must be located in the root directory of the repository to be loaded.
 
 ```zsh
 pnpm dev
@@ -24,7 +24,7 @@ pnpm dev
 
 #### For production:
 
-Note that all environment variables for [lit-task-client](packages/lit-task-client/README.md) must be defined in the host environment.
+Note that [all environment variables](.env.example) for the worker process must be defined in the host environment. Production does not use `dotenvx`.
 
 ```zsh
 pnpm start
@@ -32,14 +32,14 @@ pnpm start
 
 ## 📦 Packages
 
-| Package              | Purpose                                                                                                        |
-| -------------------- |----------------------------------------------------------------------------------------------------------------|
-| lit-task-client      | Provides methods to load and validate mongo credentials from env type-safely and create a task client instance |
-| lit-task-auto-top-up | Task to mints capacity credit NFTs for a list of recipient addresses defined in JSON at a configured URL       |
+| Package                                                         | Purpose                                                                                                    |
+| --------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| [lit-task-client](packages/lit-task-client/README.md)           | Load and validate mongo credentials from env in a type-safe way, and produce a task client Agenda instance |
+| [lit-task-auto-top-up](packages/lit-task-auto-top-up/README.md) | Task to mint capacity credit NFTs for a list of recipient addresses defined in JSON at a configured URL    |
 
 ## 💻 Development
 
-The repository is a mono-repo leverage `pnpm` as the package manager, using `pnpm workspaces`. It requires Node v18+, we recommend you use `nvm` to select the correct node version via the included `.nvmrc` file.
+The repository is a mono-repo leveraging `pnpm` as the package manager, using `pnpm workspaces`. It requires Node v18+, it is recommended that you use `nvm` to select the correct node version via the included `.nvmrc` file.
 
 - Clone the repository
 - Enable [Corepack](https://github.com/nodejs/corepack) using `corepack enable`

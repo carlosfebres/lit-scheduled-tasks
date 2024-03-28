@@ -1,8 +1,8 @@
 {
   "extends": "@tsconfig/node18/tsconfig.json",
-  "include": ["./worker/*"],
+  "include": ["./worker/*", "bin/*"],
   "compilerOptions": {
-    "module": "es2015",
+    "module": "esnext",
     "moduleResolution": "Bundler",
     "strict": true,
     "outDir": "./dist"

@@ -32,6 +32,9 @@ jobs:
         run: pnpm build
       - name: Lint
         run: pnpm lint
+      - name: Validate Recipients JSON format
+        run: pnpm ci_validate
+
   tests:
     needs: 'lint'
     name: 'Tests'

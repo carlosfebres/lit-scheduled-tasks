@@ -5,7 +5,8 @@
   "description": "Scheduled tasks for LIT Protocol",
   "homepage": "https://github.com/LIT-protocol/lit-scheduled-tasks",
   "engines": {
-    "node": "^18.19.1"
+    "node": "^18.19.1",
+    "pnpm": "8.15.5"
   },
   "type": "module",
   "scripts": {

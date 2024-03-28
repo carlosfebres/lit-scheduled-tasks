@@ -10,7 +10,7 @@
   "type": "module",
   "scripts": {
     "build": "pnpm -r run build && pnpm tsc",
-    "lint": "pnpm eslint . && pnpm --parallel -r run lint",
+    "lint": "pnpm eslint .",
     "clean": "pnpm exec rm -Rf node_modules dist && pnpm --parallel -r run clean",
     "test": "pnpm -r run test",
     "dev": "pnpm build && pnpm dotenvx run -- node ./dist/worker/worker_test_run_now.js",

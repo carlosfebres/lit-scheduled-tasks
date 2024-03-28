@@ -1,3 +1,4 @@
+import { isAddress } from 'viem';
 import { z } from 'zod';
 
 import { DEFAULT_RECIPIENT_LIST_URL } from '../constants';
@@ -5,7 +6,12 @@ import { DEFAULT_RECIPIENT_LIST_URL } from '../constants';
 export const recipientDetailSchema = z
   .object({
     daysUntilExpires: z.number().default(10),
-    recipientAddress: z.string(),
+    recipientAddress: z.string().refine(
+      (addr) => isAddress(addr, { strict: true }),
+      (addr) => ({
+        message: `recipientAddress ${addr} is not valid/malformed`,
+      })
+    ),
     requestsPerSecond: z.number().default(10),
   })
   .required();

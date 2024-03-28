@@ -58,5 +58,5 @@ jobs:
         run: pnpm install
       - name: Build packages - for Typescript workspace references
         run: pnpm build
-      - name: Lint
+      - name: Tests
         run: pnpm test

@@ -1,0 +1,38 @@
+{
+  "name": "lit-task-client",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "pnpm unbuild --sourcemap",
+    "lint": "pnpm eslint .",
+    "clean": "pnpm exec rm -Rf node_modules dist",
+    "stub": "pnpm unbuild --stub",
+    "test": "pnpm mocha",
+    "dev": "echo 'This will use stub when #371 is fixed.' && pnpm dotenvx run -- node dist/bin/start.mjs",
+    "start": "echo 'Production start! Skipping dotenvx.' && pnpm node dist/bin/start.mjs"
+  },
+  "dependencies": {
+    "@hokify/agenda": "^6.3.0",
+    "consola": "^3.2.3",
+    "lit-task-auto-top-up": "workspace:*",
+    "lodash": "^4.17.21",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "chai": "^5.1.0"
+  }
+}

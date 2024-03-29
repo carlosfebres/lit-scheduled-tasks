@@ -16,7 +16,7 @@ jobs:
       - name: Install PNPM
         uses: pnpm/action-setup@v2
         with:
-          version: 6.32.9
+          version: 8.15.5
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
@@ -24,7 +24,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version-file: '.nvmrc'
           cache: 'pnpm'
       - name: Install project dependencies
         run: pnpm install
@@ -32,6 +32,9 @@ jobs:
         run: pnpm build
       - name: Lint
         run: pnpm lint
+      - name: Validate Recipients JSON format
+        run: pnpm ci_validate
+
   tests:
     needs: 'lint'
     name: 'Tests'
@@ -41,7 +44,7 @@ jobs:
       - name: Install PNPM
         uses: pnpm/action-setup@v2
         with:
-          version: 6.32.9
+          version: 8.15.5
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
@@ -49,11 +52,11 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version-file: '.nvmrc'
           cache: 'pnpm'
       - name: Install project dependencies
         run: pnpm install
       - name: Build packages - for Typescript workspace references
         run: pnpm build
-      - name: Lint
+      - name: Tests
         run: pnpm test

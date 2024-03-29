@@ -1,0 +1,47 @@
+{
+  "name": "lit-task-auto-top-up",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "packageManager": "pnpm@8.15.5",
+  "exports": {
+    ".": {
+      "import": {
+        "default": "./dist/index.mjs",
+        "types": "./dist/index.d.ts"
+      },
+      "require": {
+        "default": "./dist/index.cjs",
+        "types": "./dist/index.d.ts"
+      }
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "pnpm unbuild --sourcemap",
+    "lint": "pnpm eslint .",
+    "clean": "pnpm exec rm -Rf node_modules dist",
+    "stub": "pnpm unbuild --stub",
+    "test": "pnpm mocha",
+    "dev": "echo 'This will use stub when #371 is fixed.' && pnpm build && echo 'Built the package for local use! Carry on.'"
+  },
+  "dependencies": {
+    "@hokify/agenda": "^6.3.0",
+    "@lit-protocol/contracts-sdk": "^4.1.1",
+    "awaity": "^1.0.0",
+    "consola": "^3.2.3",
+    "lodash": "^4.17.21",
+    "verror": "^1.10.1",
+    "viem": "^2.9.5",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "chai": "^5.1.0"
+  }
+}

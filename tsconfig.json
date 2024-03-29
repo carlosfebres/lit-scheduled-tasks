@@ -1,0 +1,10 @@
+{
+  "extends": "@tsconfig/node18/tsconfig.json",
+  "include": ["./worker/*", "bin/*"],
+  "compilerOptions": {
+    "module": "esnext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "outDir": "./dist"
+  }
+}

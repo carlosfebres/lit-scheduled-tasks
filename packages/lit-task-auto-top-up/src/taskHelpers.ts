@@ -3,7 +3,20 @@ import { ConsolaInstance } from 'consola';
 import _ from 'lodash';
 import VError, { MultiError } from 'verror';
 
+import { TaskResultEnum } from './types/enums';
 import { TaskResult } from './types/types';
+
+// This is so fly like superman, I gotta credit mmmmveggies. Extract<> is pretty cool.
+// https://stackoverflow.com/a/63831756
+function hasProp<K extends PropertyKey, V extends string | number | boolean>(k: K, v: V) {
+  // All candidate types might have key `K` of any type
+  type Candidate = Partial<Record<K, any>> | null | undefined;
+
+  // All matching subtypes of T must have key `K` equal value `V`
+  type Match<T extends Candidate> = Extract<T, Record<K, V>>;
+
+  return <T extends Candidate>(obj: T): obj is Match<T> => obj?.[k] === v;
+}
 
 export function printTaskResultsAndFailures({
   logger,
@@ -12,19 +25,32 @@ export function printTaskResultsAndFailures({
   logger: ConsolaInstance;
   results: PromiseSettledResult<TaskResult>[];
 }) {
-  const fulfilled = results.filter(
-    (r): r is PromiseFulfilledResult<TaskResult> => r.status === 'fulfilled'
-  );
-  const rejected = results.filter((r): r is PromiseRejectedResult => r.status === 'rejected');
+  const fulfilled = results.filter(hasProp('status', 'fulfilled'));
+  const rejected = results.filter(hasProp('status', 'rejected'));
 
   const errors = rejected.map(({ reason }: { reason: Error }) => reason);
-  const successes = fulfilled.map(({ value }) => value);
+  const mints = fulfilled
+    .map(({ value }) => value)
+    .filter(hasProp('result', TaskResultEnum.minted));
+  const skips = fulfilled
+    .map(({ value }) => value)
+    .filter(hasProp('result', TaskResultEnum.skipped));
 
-  logger.log(`Succeeded topping off ${successes.length} recipients`);
-  _.forEach(successes, (r) => {
-    const { recipientAddress, ...rest } = r;
-    logger.log(`Minted for ${recipientAddress}`, rest);
-  });
+  if (skips.length > 0) {
+    logger.log(`Skipped topping off ${skips.length} recipients`);
+    _.forEach(skips, (r) => {
+      const { recipientAddress, ...rest } = r;
+      logger.log(`Skipped ${recipientAddress}`, rest);
+    });
+  }
+
+  if (mints.length > 0) {
+    logger.log(`Succeeded topping off ${mints.length} recipients`);
+    _.forEach(mints, (r) => {
+      const { recipientAddress, ...rest } = r;
+      logger.log(`Minted for ${recipientAddress}`, rest);
+    });
+  }
 
   if (errors.length > 0) {
     logger.log(`Failed to top off ${errors.length} recipients`);
@@ -37,7 +63,7 @@ export function printTaskResultsAndFailures({
       throw VError.errorFromList(errors) as MultiError;
     }
   } else {
-    logger.log('All recipients were topped off successfully.');
+    logger.log('All recipients were topped off successfully or skipped.');
   }
 }
 

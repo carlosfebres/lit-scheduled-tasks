@@ -11,9 +11,7 @@ import { getLitContractsInstance } from '../singletons/getLitContracts';
 import { getRecipientList } from '../singletons/getRecipientList';
 import { tryTouchTask, printTaskResultsAndFailures } from '../taskHelpers';
 import { TaskResultEnum } from '../types/enums';
-import { Config, EnvConfig, RecipientDetail, TaskResult } from '../types/types';
-
-const { mapSeries } = awaity;
+import { Config, EnvConfig, RecipientDetail, TaskResult, CapacityToken } from '../types/types';
 
 export class TaskHandler {
   private envConfig: EnvConfig;
@@ -32,11 +30,14 @@ export class TaskHandler {
     recipientDetail: RecipientDetail;
   }): Promise<TaskResult> {
     const { recipientAddress } = recipientDetail;
-    const { noUnexpiredTokensTomorrow, unexpiredTokens } = await this.getExistingTokenDetails({
-      recipientAddress,
+
+    const tokens = await this.fetchExistingTokens({ recipientAddress });
+    const { noUsableTokensTomorrow, unexpiredTokens } = this.getExistingTokenDetails({
+      tokens,
+      today: new Date(),
     });
 
-    if (noUnexpiredTokensTomorrow) {
+    if (noUsableTokensTomorrow) {
       const capacityTokenIdStr = await mintCapacityCreditNFT({ recipientDetail });
       await transferCapacityTokenNFT({ capacityTokenIdStr, recipientAddress });
 
@@ -51,27 +52,24 @@ export class TaskHandler {
     };
   }
 
-  private async getExistingTokenDetails({ recipientAddress }: { recipientAddress: string }) {
-    const tomorrow = date.addDays(new Date(), 1);
+  private async fetchExistingTokens({ recipientAddress }: { recipientAddress: string }) {
     const litContracts = await getLitContractsInstance();
 
     // :sad_panda:, `getTokensByOwnerAddress()` returns <any> :(
-    const existingTokens: {
-      URI: { description: string; image_data: string; name: string };
-      capacity: {
-        expiresAt: { formatted: string; timestamp: number };
-        requestsPerMillisecond: number;
-      };
-      isExpired: boolean;
-      tokenId: number;
-    }[] =
+    const existingTokens: CapacityToken[] =
       await litContracts.rateLimitNftContractUtils.read.getTokensByOwnerAddress(recipientAddress);
+
+    return existingTokens;
+  }
+
+  getExistingTokenDetails({ today, tokens }: { today: Date; tokens: CapacityToken[] }) {
+    const tomorrow = date.addDays(today, 1);
 
     // Only mint a new token if the recipient...
     // 1. Has no NFTs at all
     // 2. All unexpired NFTs they have will expire tomorrow
     // 3. All of their NFTs are already expired
-    const noUnexpiredTokensTomorrow = existingTokens.every((token) => {
+    const noUsableTokensTomorrow = tokens.every((token) => {
       // NOTE: `every()` on an empty array === true :)
       const {
         capacity: {
@@ -82,24 +80,25 @@ export class TaskHandler {
       if (isExpired) {
         return true;
       }
-      return date.isSameDay(new Date(timestamp), tomorrow);
+      return (
+        date.isSameDay(new Date(timestamp), tomorrow) || date.isSameDay(new Date(timestamp), today)
+      );
     });
     return {
-      noUnexpiredTokensTomorrow,
-      unexpiredTokens: existingTokens
-        .filter(({ isExpired }) => !isExpired)
-        .map(
-          ({
-            capacity: {
-              expiresAt: { formatted },
-            },
-            tokenId,
-          }) => ({
-            tokenId,
-            expiresAt: formatted,
-          })
-        ),
+      noUsableTokensTomorrow,
+      unexpiredTokens: tokens.filter(({ isExpired }) => !isExpired).map(this.mapUnexpiredToken),
     };
+  }
+
+  mapUnexpiredToken(token: CapacityToken): { expiresAt: string; tokenId: number } {
+    const {
+      capacity: {
+        expiresAt: { formatted },
+      },
+      tokenId,
+    } = token;
+
+    return { tokenId, expiresAt: formatted };
   }
 
   async handleTask(task: Job) {
@@ -109,7 +108,7 @@ export class TaskHandler {
       const recipientList = await getRecipientList();
       this.logger.log(`Loaded ${recipientList.length} recipient addresses from JSON`);
 
-      const results = await mapSeries<RecipientDetail, PromiseSettledResult<TaskResult>>(
+      const results = await awaity.mapSeries<RecipientDetail, PromiseSettledResult<TaskResult>>(
         recipientList,
         async (recipientDetail) => {
           const [settledResult] = await Promise.allSettled([

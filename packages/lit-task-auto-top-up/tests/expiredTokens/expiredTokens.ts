@@ -44,7 +44,7 @@ function testAndAssert({
   return true;
 }
 describe('Expired Tokens', () => {
-  describe('noUnexpiredTokensTomorrow', () => {
+  describe('noUsableTokensTomorrow', () => {
     it('should be `true` when there are no tokens at all', () => {
       testAndAssert({});
     });

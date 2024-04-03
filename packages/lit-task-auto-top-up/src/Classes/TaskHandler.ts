@@ -67,7 +67,7 @@ export class TaskHandler {
 
     // Only mint a new token if the recipient...
     // 1. Has no NFTs at all
-    // 2. All unexpired NFTs they have will expire tomorrow
+    // 2. All unexpired NFTs they have will expire later today or tomorrow
     // 3. All of their NFTs are already expired
     const noUsableTokensTomorrow = tokens.every((token) => {
       // NOTE: `every()` on an empty array === true :)

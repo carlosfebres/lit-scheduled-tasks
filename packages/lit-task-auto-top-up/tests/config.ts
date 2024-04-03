@@ -10,7 +10,7 @@ const NFT_MINTER_KEY = '123456789012345678901234567890123';
 const LIT_NETWORK = 'manzano';
 const RECIPIENT_LIST_URL = 'https://example.com/json/file.json';
 
-const COMPLETE_CONFIG: EnvConfig = {
+export const COMPLETE_CONFIG: EnvConfig = {
   LIT_NETWORK,
   NFT_MINTER_ADDRESS,
   NFT_MINTER_KEY,

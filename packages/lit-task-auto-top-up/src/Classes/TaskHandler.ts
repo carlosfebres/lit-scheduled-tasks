@@ -1,16 +1,17 @@
 import { Job } from '@hokify/agenda';
 import awaity from 'awaity'; // Awaity is a cjs package, breaks `import` with named imports in ESM
 import { ConsolaInstance } from 'consola';
+import date from 'date-and-time';
 import VError from 'verror';
 
 import { mintCapacityCreditNFT } from '../actions/mintCapacityCreditNFT';
 import { transferCapacityTokenNFT } from '../actions/transferCapacityTokenNFT';
 import { toErrorWithMessage } from '../errors';
+import { getLitContractsInstance } from '../singletons/getLitContracts';
 import { getRecipientList } from '../singletons/getRecipientList';
 import { tryTouchTask, printTaskResultsAndFailures } from '../taskHelpers';
-import { Config, EnvConfig, RecipientDetail, TaskResult } from '../types/types';
-
-const { mapSeries } = awaity;
+import { TaskResultEnum } from '../types/enums';
+import { Config, EnvConfig, RecipientDetail, TaskResult, CapacityToken } from '../types/types';
 
 export class TaskHandler {
   private envConfig: EnvConfig;
@@ -30,10 +31,74 @@ export class TaskHandler {
   }): Promise<TaskResult> {
     const { recipientAddress } = recipientDetail;
 
-    const capacityTokenIdStr = await mintCapacityCreditNFT({ recipientDetail });
-    await transferCapacityTokenNFT({ capacityTokenIdStr, recipientAddress });
+    const tokens = await this.fetchExistingTokens({ recipientAddress });
+    const { noUsableTokensTomorrow, unexpiredTokens } = this.getExistingTokenDetails({
+      tokens,
+      today: new Date(),
+    });
 
-    return { capacityTokenIdStr, ...recipientDetail };
+    if (noUsableTokensTomorrow) {
+      const capacityTokenIdStr = await mintCapacityCreditNFT({ recipientDetail });
+      await transferCapacityTokenNFT({ capacityTokenIdStr, recipientAddress });
+
+      return { capacityTokenIdStr, result: TaskResultEnum.minted, ...recipientDetail };
+    }
+
+    // If we got here, there should be some `unexpiredTokens` to log for clarity later.
+    return {
+      ...recipientDetail,
+      unexpiredTokens,
+      result: TaskResultEnum.skipped,
+    };
+  }
+
+  private async fetchExistingTokens({ recipientAddress }: { recipientAddress: string }) {
+    const litContracts = await getLitContractsInstance();
+
+    // :sad_panda:, `getTokensByOwnerAddress()` returns <any> :(
+    const existingTokens: CapacityToken[] =
+      await litContracts.rateLimitNftContractUtils.read.getTokensByOwnerAddress(recipientAddress);
+
+    return existingTokens;
+  }
+
+  getExistingTokenDetails({ today, tokens }: { today: Date; tokens: CapacityToken[] }) {
+    const tomorrow = date.addDays(today, 1);
+
+    // Only mint a new token if the recipient...
+    // 1. Has no NFTs at all
+    // 2. All unexpired NFTs they have will expire later today or tomorrow
+    // 3. All of their NFTs are already expired
+    const noUsableTokensTomorrow = tokens.every((token) => {
+      // NOTE: `every()` on an empty array === true :)
+      const {
+        capacity: {
+          expiresAt: { timestamp },
+        },
+        isExpired,
+      } = token;
+      if (isExpired) {
+        return true;
+      }
+      return (
+        date.isSameDay(new Date(timestamp), tomorrow) || date.isSameDay(new Date(timestamp), today)
+      );
+    });
+    return {
+      noUsableTokensTomorrow,
+      unexpiredTokens: tokens.filter(({ isExpired }) => !isExpired).map(this.mapUnexpiredToken),
+    };
+  }
+
+  mapUnexpiredToken(token: CapacityToken): { expiresAt: string; tokenId: number } {
+    const {
+      capacity: {
+        expiresAt: { formatted },
+      },
+      tokenId,
+    } = token;
+
+    return { tokenId, expiresAt: formatted };
   }
 
   async handleTask(task: Job) {
@@ -43,14 +108,14 @@ export class TaskHandler {
       const recipientList = await getRecipientList();
       this.logger.log(`Loaded ${recipientList.length} recipient addresses from JSON`);
 
-      const results = await mapSeries<RecipientDetail, PromiseSettledResult<TaskResult>>(
+      const results = await awaity.mapSeries<RecipientDetail, PromiseSettledResult<TaskResult>>(
         recipientList,
         async (recipientDetail) => {
           const [settledResult] = await Promise.allSettled([
             this.handleRecipient({ recipientDetail }),
           ]);
 
-          this.logger.log(`Finished top-up for ${recipientDetail.recipientAddress}`);
+          this.logger.log(`Finished processing ${recipientDetail.recipientAddress}`);
           tryTouchTask(task).then(() => true); // Fire-and-forget; touching job is not critical
 
           return settledResult;
@@ -60,7 +125,7 @@ export class TaskHandler {
       printTaskResultsAndFailures({ results, logger: this.logger });
     } catch (e) {
       const err = toErrorWithMessage(e);
-      this.logger.error('CRITICAL ERROR', JSON.stringify(VError.info(err), null, 2));
+      this.logger.error('CRITICAL ERROR', e, JSON.stringify(VError.info(err), null, 2));
 
       // Re-throw so the job is retried by the task worker
       throw err;

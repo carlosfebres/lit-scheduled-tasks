@@ -1,0 +1,23 @@
+[
+  {
+    "recipientAddress": "0x9f32f6555a117ac137775973C6856bC52c249C80",
+    "daysUntilExpires": 5,
+    "requestsPerSecond": 5
+  },
+  {
+    "recipientAddress": "0xB34f1F28F25485b074c623D3711F4b5ea91d9CFb",
+    "daysUntilExpires": 15,
+    "requestsPerSecond": 15
+  },
+  {
+    "recipientAddress": "0x1F62583538CDB2CB3656Ed43A46693F92DDa6302",
+    "daysUntilExpires": 30,
+    "requestsPerSecond": 10000
+  },
+  {
+    "recipientAddress": "0x4447D4d650cE9E63E21D2AA799e8016dEBf1e272",
+    "daysUntilExpires": 30,
+    "requestsPerSecond": 10000
+  }
+]
+    

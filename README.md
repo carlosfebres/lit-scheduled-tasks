@@ -1,7 +1,8 @@
 # 🔥 LIT Scheduled Tasks 🔧
 
 This repo provides scaffolding for running internal scheduled tasks on a CRON-like schedule.
-If you need to add an account to receive auto-top-up rate limit NFTs, see the [worker readme](./worker/README.md)
+
+### If you need to add an account to receive auto-top-up rate limit NFTs, see the [worker readme](./worker/README.md)
 
 ## ❌ Installation
 

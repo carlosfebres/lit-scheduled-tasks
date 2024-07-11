@@ -1,3 +1,3 @@
 export const DEFAULT_RECIPIENT_LIST_URL =
-  'https://raw.githubusercontent.com/LIT-Protocol/lit-scheduled-tasks/blob/main/worker/recipient_list.json';
+  'https://raw.githubusercontent.com/LIT-Protocol/lit-scheduled-tasks/blob/main/worker/recipient_list_habanero.json';
 export const taskName = 'top-up capacity credits';

@@ -7,6 +7,10 @@ There is 1 file per supported network:
 
 ### [Manzano](./recipient_list_manzano.json)
 
+### [Datil-test](./recipient_list_datil-test.json)
+
+### [Datil](./recipient_list_datil.json)
+
 Note that entries must match the following shape:
 
 ```json

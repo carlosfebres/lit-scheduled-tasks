@@ -112,8 +112,8 @@ importers:
         specifier: ^6.3.0
         version: 6.3.0
       '@lit-protocol/contracts-sdk':
-        specifier: ^6.1.0
-        version: 6.1.0
+        specifier: ^6.4.0
+        version: 6.4.0(typescript@5.4.3)
       awaity:
         specifier: ^1.0.0
         version: 1.0.0
@@ -1814,23 +1814,25 @@ packages:
       ajv: 8.12.0
     dev: false
 
-  /@lit-protocol/constants@6.1.0:
-    resolution: {integrity: sha512-PuLZ+1K5NizuQ7N+S/4Z81+yyWICTQE7T2BFcWYPjvTX0HbUp0hiVfeFwH9J0c2eZs6sok9LRpMXE4RD5LRzRw==}
+  /@lit-protocol/constants@6.4.0(typescript@5.4.3):
+    resolution: {integrity: sha512-lnCpxymWbuY2xsSlnmNsJkFY8LoSdj6JeqGD1fVfXUv/seMn0iEUfaZ1XNgw4TY5GnJsv0z9K2cwaKmQkLxGVQ==}
     dependencies:
       '@ethersproject/abstract-provider': 5.7.0
       '@lit-protocol/accs-schemas': 0.0.7
-      '@lit-protocol/types': 6.1.0
+      '@lit-protocol/contracts': 0.0.39(typescript@5.4.3)
+      '@lit-protocol/types': 6.4.0
       ethers: 5.7.2
       jszip: 3.10.1
       siwe: 2.1.4(ethers@5.7.2)
       tslib: 1.14.1
     transitivePeerDependencies:
       - bufferutil
+      - typescript
       - utf-8-validate
     dev: false
 
-  /@lit-protocol/contracts-sdk@6.1.0:
-    resolution: {integrity: sha512-jKuhtJM0rP0bFPyWtiLzLA1rmbG6sy0CT+RxTAudLbcB5QE8sYqU4jv320+JY3BOTyGy8X9l3OArNZEP0BR3mg==}
+  /@lit-protocol/contracts-sdk@6.4.0(typescript@5.4.3):
+    resolution: {integrity: sha512-qZuFIiSjdWyBXmkhRRvb0FrKfGwXe4+3f0ARytPDFNL2g5mMwy5IQ9EQPm0HnAe0/HqrBX3oZ+DPsjRHJ4g7qQ==}
     dependencies:
       '@cosmjs/amino': 0.30.1
       '@cosmjs/crypto': 0.30.1
@@ -1840,10 +1842,11 @@ packages:
       '@ethersproject/contracts': 5.7.0
       '@ethersproject/providers': 5.7.2
       '@lit-protocol/accs-schemas': 0.0.7
-      '@lit-protocol/constants': 6.1.0
-      '@lit-protocol/logger': 6.1.0
-      '@lit-protocol/misc': 6.1.0
-      '@lit-protocol/types': 6.1.0
+      '@lit-protocol/constants': 6.4.0(typescript@5.4.3)
+      '@lit-protocol/contracts': 0.0.39(typescript@5.4.3)
+      '@lit-protocol/logger': 6.4.0(typescript@5.4.3)
+      '@lit-protocol/misc': 6.4.0(typescript@5.4.3)
+      '@lit-protocol/types': 6.4.0
       ajv: 8.12.0
       bitcoinjs-lib: 6.1.5
       ethers: 5.7.2
@@ -1857,16 +1860,26 @@ packages:
       util: 0.12.5
     transitivePeerDependencies:
       - bufferutil
+      - typescript
       - utf-8-validate
     dev: false
 
-  /@lit-protocol/logger@6.1.0:
-    resolution: {integrity: sha512-jjeISmjkjWsXsyBixXlbU1QH1T19qUnpCl2mCb8gsxHTcUoHWTN9yJtdKzbuhgjg2Cru5qPgy6hbkiAWeD4woQ==}
+  /@lit-protocol/contracts@0.0.39(typescript@5.4.3):
+    resolution: {integrity: sha512-zz/TaKWUqFK2n7BqwKj9PeV0px89G7dnjkRJ9BM/eri356zodd/W5d5iGQUVdaFiCYKd/cibm4004BnuMlXLeg==}
+    peerDependencies:
+      typescript: ^5.0.0
+    dependencies:
+      typescript: 5.4.3
+    dev: false
+
+  /@lit-protocol/logger@6.4.0(typescript@5.4.3):
+    resolution: {integrity: sha512-0+bBR79PfkASklFHXhZn5CDZMdoRPy43AOgUQVXCppXNpOqdhRuxUNXyDuoOJhmkFq21ns7XMtxkxcXDTCEWzw==}
     dependencies:
       '@ethersproject/abstract-provider': 5.7.0
       '@lit-protocol/accs-schemas': 0.0.7
-      '@lit-protocol/constants': 6.1.0
-      '@lit-protocol/types': 6.1.0
+      '@lit-protocol/constants': 6.4.0(typescript@5.4.3)
+      '@lit-protocol/contracts': 0.0.39(typescript@5.4.3)
+      '@lit-protocol/types': 6.4.0
       ethers: 5.7.2
       jszip: 3.10.1
       punycode: 2.3.1
@@ -1875,19 +1888,21 @@ packages:
       uint8arrays: 4.0.10
     transitivePeerDependencies:
       - bufferutil
+      - typescript
       - utf-8-validate
     dev: false
 
-  /@lit-protocol/misc@6.1.0:
-    resolution: {integrity: sha512-ii6O4J42XFa2beDbHFZu+Voq46Onbg7NzhmwG+GN2dS3t2adMlVIfMSYOUcC6xUQHR4v10IF4UhbjBQ4kBeslg==}
+  /@lit-protocol/misc@6.4.0(typescript@5.4.3):
+    resolution: {integrity: sha512-ek1DWsj2I5P95nGEdSbjyDHF4/gbD5bn6W8bCMy6DHZSnahh5ae6iY1CD0hDGRfbowCtLM3vaPydRhZwN6UuEg==}
     dependencies:
       '@ethersproject/abstract-provider': 5.7.0
       '@ethersproject/contracts': 5.7.0
       '@ethersproject/providers': 5.7.2
       '@lit-protocol/accs-schemas': 0.0.7
-      '@lit-protocol/constants': 6.1.0
-      '@lit-protocol/logger': 6.1.0
-      '@lit-protocol/types': 6.1.0
+      '@lit-protocol/constants': 6.4.0(typescript@5.4.3)
+      '@lit-protocol/contracts': 0.0.39(typescript@5.4.3)
+      '@lit-protocol/logger': 6.4.0(typescript@5.4.3)
+      '@lit-protocol/types': 6.4.0
       ajv: 8.12.0
       ethers: 5.7.2
       jszip: 3.10.1
@@ -1898,11 +1913,12 @@ packages:
       util: 0.12.5
     transitivePeerDependencies:
       - bufferutil
+      - typescript
       - utf-8-validate
     dev: false
 
-  /@lit-protocol/types@6.1.0:
-    resolution: {integrity: sha512-FLujzG3vmeZYlfobr/FerxEH2rFVs3xo+yZOm6WaEQhzF8mhptuMgwwSq1jV9OnGlimDMofXXgP6DwKna4GnzQ==}
+  /@lit-protocol/types@6.4.0:
+    resolution: {integrity: sha512-x1PGp5+c3eG/RezHSk2ucnxlxkLs1+Y9r2R4jBGmKQ8V1JyOsyrTaWz645nItSLZRKTQxdtU7EV1k25VeuAAnQ==}
     dependencies:
       '@ethersproject/abstract-provider': 5.7.0
       '@lit-protocol/accs-schemas': 0.0.7

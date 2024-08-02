@@ -21,7 +21,7 @@ export const requiredConfigSchema = {
   NFT_MINTER_KEY: z.string().min(32),
 };
 
-const LIT_NETWORKS = z.enum(['cayenne', 'custom', 'manzano', 'habanero']);
+const LIT_NETWORKS = z.enum(['cayenne', 'custom', 'manzano', 'habanero', 'datil', 'datil-test']);
 export const optionalConfigSchema = {
   LIT_NETWORK: LIT_NETWORKS.default('cayenne'),
   RECIPIENT_LIST_URL: z.string().default(DEFAULT_RECIPIENT_LIST_URL),

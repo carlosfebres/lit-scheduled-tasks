@@ -4,4 +4,10 @@
     "daysUntilExpires": 20,
     "requestsPerSecond": 20
   }
+
+  {
+    "recipientAddress": "0x49B330af2e9B16189a55d45bcf808d2D92bce1f6",
+    "daysUntilExpires": 2,
+    "requestsPerSecond": 20
+  }
 ]

@@ -32,12 +32,13 @@
     "dev": "echo 'This will use stub when #371 is fixed.' && pnpm build && echo 'Built the package for local use! Carry on.'"
   },
   "dependencies": {
+    "@date-fns/tz": "^1.1.2",
     "@hokify/agenda": "^6.3.0",
     "@lit-protocol/contracts-sdk": "^6.4.0",
     "awaity": "^1.0.0",
     "bs58": "^5.0.0",
     "consola": "^3.2.3",
-    "date-and-time": "2.4.1",
+    "date-fns": "^4.1.0",
     "lodash": "^4.17.21",
     "multiformats": "9.7.1",
     "verror": "^1.10.1",
@@ -45,7 +46,6 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@types/date-and-time": "0.13.0",
     "chai": "^5.1.0"
   }
 }

@@ -1,4 +1,5 @@
-import date from 'date-and-time';
+import { TZDate } from '@date-fns/tz';
+import { startOfDay, addDays, subDays, addWeeks, addHours } from 'date-fns';
 
 import { CapacityToken } from '../../src/types/types';
 
@@ -24,21 +25,26 @@ interface TokenFixtures {
   unexpired: Record<Unexpired, CapacityToken>;
   unexpiredButInvalid: Record<UnexpiredButInvalid, CapacityToken>;
 }
-function getMidnightToday(now: Date) {
-  const midnightDate = new Date(now);
-  midnightDate.setHours(0, 0, 0, 0);
-  return midnightDate;
-}
 
-export const NOW = new Date(1712157737877);
-export const MIDNIGHT_TODAY = getMidnightToday(NOW);
-export const DAY_BEFORE_YESTERDAY = date.addDays(MIDNIGHT_TODAY, -2);
-export const YESTERDAY = date.addDays(MIDNIGHT_TODAY, -1);
-export const LATER_TODAY = date.addHours(NOW, 2);
-export const TOMORROW = date.addDays(MIDNIGHT_TODAY, 1);
-export const DAY_AFTER_TOMORROW = date.addDays(MIDNIGHT_TODAY, 2);
-export const NEXT_WEEK = date.addDays(MIDNIGHT_TODAY, 7);
-export const TWO_WEEKS_FROM_NOW = date.addDays(MIDNIGHT_TODAY, 14);
+export const NOW = new TZDate(1712157737877, 'UTC');
+export const MIDNIGHT_TODAY = startOfDay(NOW);
+export const YESTERDAY = subDays(MIDNIGHT_TODAY, 1);
+export const DAY_BEFORE_YESTERDAY = subDays(MIDNIGHT_TODAY, 2);
+export const LATER_TODAY = addHours(NOW, 2);
+export const TOMORROW = addDays(MIDNIGHT_TODAY, 1);
+export const DAY_AFTER_TOMORROW = addDays(MIDNIGHT_TODAY, 2);
+export const NEXT_WEEK = addWeeks(MIDNIGHT_TODAY, 1);
+export const TWO_WEEKS_FROM_NOW = addWeeks(MIDNIGHT_TODAY, 2);
+
+// console.log('NOW', NOW.toISOString());
+// console.log('MIDNIGHT_TODAY', MIDNIGHT_TODAY.toISOString());
+// console.log('DAY_BEFORE_YESTERDAY', DAY_BEFORE_YESTERDAY.toISOString());
+// console.log('YESTERDAY', YESTERDAY.toISOString());
+// console.log('LATER_TODAY', LATER_TODAY.toISOString());
+// console.log('TOMORROW', TOMORROW.toISOString());
+// console.log('DAY_AFTER_TOMORROW', DAY_AFTER_TOMORROW.toISOString());
+// console.log('NEXT_WEEK', NEXT_WEEK.toISOString());
+// console.log('TWO_WEEKS_FROM_NOW', TWO_WEEKS_FROM_NOW.toISOString());
 
 export const tokenFixtures: TokenFixtures = {
   expired: {

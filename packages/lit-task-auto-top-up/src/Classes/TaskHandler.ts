@@ -1,7 +1,8 @@
+import { TZDate } from '@date-fns/tz';
 import { Job } from '@hokify/agenda';
 import awaity from 'awaity'; // Awaity is a cjs package, breaks `import` with named imports in ESM
 import { ConsolaInstance } from 'consola';
-import date from 'date-and-time';
+import { addDays, isSameDay } from 'date-fns';
 import VError from 'verror';
 
 import { mintCapacityCreditNFT } from '../actions/mintCapacityCreditNFT';
@@ -34,7 +35,7 @@ export class TaskHandler {
     const tokens = await this.fetchExistingTokens({ recipientAddress });
     const { noUsableTokensTomorrow, unexpiredTokens } = this.getExistingTokenDetails({
       tokens,
-      today: new Date(),
+      today: TZDate.tz('UTC'),
     });
 
     if (noUsableTokensTomorrow) {
@@ -63,7 +64,7 @@ export class TaskHandler {
   }
 
   getExistingTokenDetails({ today, tokens }: { today: Date; tokens: CapacityToken[] }) {
-    const tomorrow = date.addDays(today, 1);
+    const tomorrow = addDays(today, 1);
 
     // Only mint a new token if the recipient...
     // 1. Has no NFTs at all
@@ -80,9 +81,8 @@ export class TaskHandler {
       if (isExpired) {
         return true;
       }
-      return (
-        date.isSameDay(new Date(timestamp), tomorrow) || date.isSameDay(new Date(timestamp), today)
-      );
+      const tokenExpiresDate = new TZDate(timestamp, 'UTC');
+      return isSameDay(tokenExpiresDate, tomorrow) || isSameDay(tokenExpiresDate, today);
     });
     return {
       noUsableTokensTomorrow,

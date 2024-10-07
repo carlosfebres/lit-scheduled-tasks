@@ -1,7 +1,15 @@
 import { expect } from 'chai';
 import { createConsola } from 'consola';
+import { isSameDay } from 'date-fns';
 
-import { tokenFixtures, NOW, Expired, UnexpiredButInvalid, Unexpired } from './tokenFixtures';
+import {
+  tokenFixtures,
+  NOW,
+  Expired,
+  UnexpiredButInvalid,
+  Unexpired,
+  MIDNIGHT_TODAY,
+} from './tokenFixtures';
 import { TaskHandler } from '../../src/index';
 import { CapacityToken } from '../../src/types/types';
 import { COMPLETE_CONFIG } from '../config';
@@ -44,6 +52,11 @@ function testAndAssert({
   return true;
 }
 describe('Expired Tokens', () => {
+  describe('midnight today', () => {
+    it('should be a date set to midnight of the SAME DAY as the date provided', () => {
+      expect(isSameDay(NOW, MIDNIGHT_TODAY)).equal(true);
+    });
+  });
   describe('noUsableTokensTomorrow', () => {
     it('should be `true` when there are no tokens at all', () => {
       testAndAssert({});

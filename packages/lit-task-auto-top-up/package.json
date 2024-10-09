@@ -38,6 +38,7 @@
     "awaity": "^1.0.0",
     "bs58": "^5.0.0",
     "consola": "^3.2.3",
+    "date-and-time": "2.4.1",
     "date-fns": "^4.1.0",
     "lodash": "^4.17.21",
     "multiformats": "9.7.1",

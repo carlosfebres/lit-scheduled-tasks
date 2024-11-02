@@ -16,6 +16,7 @@
     "test": "pnpm -r run test",
     "dev": "pnpm build && pnpm dotenvx run -- node ./dist/worker/worker_test_run_now.js",
     "start": "pnpm build && node ./dist/worker/worker.js",
+    "runNow": "node ./dist/worker/worker_test_run_now.js",
     "prepare": "husky",
     "ci_validate": "node ./dist/bin/validateJSONRecipients.js",
     "validate": "pnpm build && node ./dist/bin/validateJSONRecipients.js"

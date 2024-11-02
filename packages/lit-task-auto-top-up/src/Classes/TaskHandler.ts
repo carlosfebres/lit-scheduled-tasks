@@ -82,10 +82,6 @@ export class TaskHandler {
         return true;
       }
       const tokenExpiresDate = new TZDate(timestamp * 1000, 'UTC');
-      this.logger.log('timestamp from contract', timestamp);
-      this.logger.log('tokenExpiresDate', tokenExpiresDate);
-      this.logger.log('tomorrow', tomorrow);
-      this.logger.log('today', today);
       return isSameDay(tokenExpiresDate, tomorrow) || isSameDay(tokenExpiresDate, today);
     });
     return {

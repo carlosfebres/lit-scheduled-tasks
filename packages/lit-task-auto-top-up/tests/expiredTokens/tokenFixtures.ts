@@ -57,7 +57,7 @@ export const tokenFixtures: TokenFixtures = {
       capacity: {
         expiresAt: {
           formatted: DAY_BEFORE_YESTERDAY.toISOString(),
-          timestamp: DAY_BEFORE_YESTERDAY.getTime(),
+          timestamp: DAY_BEFORE_YESTERDAY.getTime() / 1000, // the real data from the contract is in seconds
         },
         requestsPerMillisecond: 50,
       },
@@ -73,7 +73,7 @@ export const tokenFixtures: TokenFixtures = {
       capacity: {
         expiresAt: {
           formatted: YESTERDAY.toISOString(),
-          timestamp: YESTERDAY.getTime(),
+          timestamp: YESTERDAY.getTime() / 1000, // the real data from the contract is in seconds
         },
         requestsPerMillisecond: 50,
       },
@@ -91,7 +91,7 @@ export const tokenFixtures: TokenFixtures = {
       capacity: {
         expiresAt: {
           formatted: DAY_AFTER_TOMORROW.toISOString(),
-          timestamp: DAY_AFTER_TOMORROW.getTime(),
+          timestamp: DAY_AFTER_TOMORROW.getTime() / 1000, // the real data from the contract is in seconds
         },
         requestsPerMillisecond: 50,
       },
@@ -107,7 +107,7 @@ export const tokenFixtures: TokenFixtures = {
       capacity: {
         expiresAt: {
           formatted: NEXT_WEEK.toISOString(),
-          timestamp: NEXT_WEEK.getTime(),
+          timestamp: NEXT_WEEK.getTime() / 1000, // the real data from the contract is in seconds,
         },
         requestsPerMillisecond: 50,
       },
@@ -123,7 +123,7 @@ export const tokenFixtures: TokenFixtures = {
       capacity: {
         expiresAt: {
           formatted: TWO_WEEKS_FROM_NOW.toISOString(),
-          timestamp: TWO_WEEKS_FROM_NOW.getTime(),
+          timestamp: TWO_WEEKS_FROM_NOW.getTime() / 1000, // the real data from the contract is in seconds,
         },
         requestsPerMillisecond: 50,
       },
@@ -141,7 +141,7 @@ export const tokenFixtures: TokenFixtures = {
       capacity: {
         expiresAt: {
           formatted: LATER_TODAY.toISOString(),
-          timestamp: LATER_TODAY.getTime(),
+          timestamp: LATER_TODAY.getTime() / 1000, // the real data from the contract is in seconds,
         },
         requestsPerMillisecond: 50,
       },
@@ -157,7 +157,7 @@ export const tokenFixtures: TokenFixtures = {
       capacity: {
         expiresAt: {
           formatted: TOMORROW.toISOString(),
-          timestamp: TOMORROW.getTime(),
+          timestamp: TOMORROW.getTime() / 1000, // the real data from the contract is in seconds,
         },
         requestsPerMillisecond: 50,
       },

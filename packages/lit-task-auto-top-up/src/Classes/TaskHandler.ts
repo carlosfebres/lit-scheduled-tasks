@@ -81,7 +81,7 @@ export class TaskHandler {
       if (isExpired) {
         return true;
       }
-      const tokenExpiresDate = new TZDate(timestamp, 'UTC');
+      const tokenExpiresDate = new TZDate(timestamp * 1000, 'UTC');
       this.logger.log('timestamp from contract', timestamp);
       this.logger.log('tokenExpiresDate', tokenExpiresDate);
       this.logger.log('tomorrow', tomorrow);

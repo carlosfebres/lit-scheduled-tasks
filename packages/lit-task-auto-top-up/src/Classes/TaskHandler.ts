@@ -81,7 +81,7 @@ export class TaskHandler {
       if (isExpired) {
         return true;
       }
-      const tokenExpiresDate = new TZDate(timestamp, 'UTC');
+      const tokenExpiresDate = new TZDate(timestamp * 1000, 'UTC');
       return isSameDay(tokenExpiresDate, tomorrow) || isSameDay(tokenExpiresDate, today);
     });
     return {

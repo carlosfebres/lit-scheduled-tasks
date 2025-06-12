@@ -17,8 +17,7 @@ export async function pruneExpiredCapacityTokenNFT({
   try {
     logger.log('Pruning expired capacity token NFTs for', recipientDetail);
 
-    // @ts-ignore FIXME: This contract method has not yet been published
-    await litContracts.rateLimitNftContract.write.pruneExpired(recipientAddress);
+    await litContracts.rateLimitNftContractUtils.write.pruneExpired(recipientAddress);
   } catch (e) {
     const err = toErrorWithMessage(e);
 

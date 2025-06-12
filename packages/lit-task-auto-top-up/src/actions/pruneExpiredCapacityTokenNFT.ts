@@ -1,5 +1,4 @@
 import { toErrorWithMessage } from '../errors';
-import { PruneCapacityTokensFailure } from '../errors/PruneCapacityTokensFailure';
 import { getConfig } from '../singletons/getConfig';
 import { getLitContractsInstance } from '../singletons/getLitContracts';
 import { RecipientDetail } from '../types/types';
@@ -17,19 +16,13 @@ export async function pruneExpiredCapacityTokenNFT({
   try {
     logger.log('Pruning expired capacity token NFTs for', recipientDetail);
 
-    await litContracts.rateLimitNftContractUtils.write.pruneExpired(recipientAddress);
+    const { actualTokensBurned, txHash } =
+      await litContracts.rateLimitNftContractUtils.write.pruneExpired(recipientAddress);
+
+    logger.log('Pruned capacity token NFTs for', recipientAddress, { actualTokensBurned, txHash });
   } catch (e) {
     const err = toErrorWithMessage(e);
 
-    throw new PruneCapacityTokensFailure(
-      {
-        cause: err,
-        info: {
-          recipientAddress,
-        },
-        name: 'PruneCapacityTokensFailure',
-      },
-      'Failed to prune capacity tokens'
-    );
+    logger.error('Failed to prune capacity tokens', err.toString(), 'for', recipientAddress, '...');
   }
 }

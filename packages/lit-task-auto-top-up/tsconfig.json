@@ -2,6 +2,7 @@
   "extends": "../../tsconfig.json",
   "include": ["src/**/*", "tests/**/*"],
   "compilerOptions": {
+    "composite": true,
     "target": "es2020",
     "module": "esnext",
     "lib": ["es2020"],

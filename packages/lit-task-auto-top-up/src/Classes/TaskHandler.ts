@@ -39,10 +39,11 @@ export class TaskHandler {
       today: TZDate.tz('UTC'),
     });
 
+    await pruneExpiredCapacityTokenNFT({ recipientDetail });
+
     if (noUsableTokensTomorrow) {
       const capacityTokenIdStr = await mintCapacityCreditNFT({ recipientDetail });
       await transferCapacityTokenNFT({ capacityTokenIdStr, recipientAddress });
-      await pruneExpiredCapacityTokenNFT({ recipientDetail });
 
       return { capacityTokenIdStr, result: TaskResultEnum.minted, ...recipientDetail };
     }

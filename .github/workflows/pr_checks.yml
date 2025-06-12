@@ -13,18 +13,16 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Install PNPM
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8.15.5
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Install PNPM
+        uses: pnpm/action-setup@v4
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version-file: '.nvmrc'
+          node-version-file: 'package.json'
           cache: 'pnpm'
       - name: Install project dependencies
         run: pnpm install
@@ -41,18 +39,16 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Install PNPM
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8.15.5
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Install PNPM
+        uses: pnpm/action-setup@v4
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version-file: '.nvmrc'
+          node-version-file: 'package.json'
           cache: 'pnpm'
       - name: Install project dependencies
         run: pnpm install

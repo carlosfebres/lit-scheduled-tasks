@@ -2,8 +2,8 @@ import { recipientDetailSchema, SUPPORTED_LIT_NETWORKS } from 'lit-task-auto-top
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { z } from 'zod';
 
-import rawDatilTestRecipientList from '../worker/recipient_list_datil-test.json' assert { type: 'json' };
-import rawDatilRecipientList from '../worker/recipient_list_datil.json' assert { type: 'json' };
+import rawDatilTestRecipientList from '../worker/recipient_list_datil-test.json' with { type: 'json' };
+import rawDatilRecipientList from '../worker/recipient_list_datil.json' with { type: 'json' };
 
 const recipientListSchema = z.array(recipientDetailSchema);
 

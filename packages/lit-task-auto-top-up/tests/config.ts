@@ -7,7 +7,7 @@ import { EnvConfig } from '../src/types/types';
 
 const NFT_MINTER_ADDRESS = '123456789012345678901234567890123';
 const NFT_MINTER_KEY = '123456789012345678901234567890123';
-const LIT_NETWORK = 'manzano';
+const LIT_NETWORK = 'datil';
 const RECIPIENT_LIST_URL = 'https://example.com/json/file.json';
 
 export const COMPLETE_CONFIG: EnvConfig = {

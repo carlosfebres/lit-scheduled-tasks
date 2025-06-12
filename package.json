@@ -5,8 +5,8 @@
   "description": "Scheduled tasks for LIT Protocol",
   "homepage": "https://github.com/LIT-protocol/lit-scheduled-tasks",
   "engines": {
-    "node": "^18.19.1",
-    "pnpm": "8.15.5"
+    "node": "^20.11.0",
+    "pnpm": "10.7.0"
   },
   "type": "module",
   "scripts": {
@@ -21,13 +21,13 @@
     "ci_validate": "node ./dist/bin/validateJSONRecipients.js",
     "validate": "pnpm build && node ./dist/bin/validateJSONRecipients.js"
   },
-  "packageManager": "pnpm@8.15.5",
+  "packageManager": "pnpm@10.7.0",
   "keywords": [],
   "author": "Daryl Collins <daryl@darylcollins.com>",
   "license": "ISC",
   "devDependencies": {
     "@dotenvx/dotenvx": "^0.26.0",
-    "@tsconfig/node18": "^18.2.2",
+    "@tsconfig/node20": "^20.1.5",
     "@types/chai": "^4.3.14",
     "@types/lodash": "^4.17.0",
     "@types/mocha": "^10.0.6",

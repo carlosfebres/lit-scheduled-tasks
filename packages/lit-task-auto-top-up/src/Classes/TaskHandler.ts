@@ -6,6 +6,7 @@ import { addDays, isSameDay } from 'date-fns';
 import VError from 'verror';
 
 import { mintCapacityCreditNFT } from '../actions/mintCapacityCreditNFT';
+import { pruneExpiredCapacityTokenNFT } from '../actions/pruneExpiredCapacityTokenNFT';
 import { transferCapacityTokenNFT } from '../actions/transferCapacityTokenNFT';
 import { toErrorWithMessage } from '../errors';
 import { getLitContractsInstance } from '../singletons/getLitContracts';
@@ -37,6 +38,8 @@ export class TaskHandler {
       tokens,
       today: TZDate.tz('UTC'),
     });
+
+    await pruneExpiredCapacityTokenNFT({ recipientDetail });
 
     if (noUsableTokensTomorrow) {
       const capacityTokenIdStr = await mintCapacityCreditNFT({ recipientDetail });

@@ -21,15 +21,9 @@ export const requiredConfigSchema = {
   NFT_MINTER_KEY: z.string().min(32),
 };
 
-export const SUPPORTED_LIT_NETWORKS = z.enum([
-  'cayenne', // Playground for testing refactors/critical changes
-  'manzano',
-  'habanero',
-  'datil',
-  'datil-test',
-]);
+export const SUPPORTED_LIT_NETWORKS = z.enum(['datil', 'datil-test']);
 export const optionalConfigSchema = {
-  LIT_NETWORK: SUPPORTED_LIT_NETWORKS.default('cayenne'),
+  LIT_NETWORK: SUPPORTED_LIT_NETWORKS.default('datil'),
   RECIPIENT_LIST_URL: z.string().default(DEFAULT_RECIPIENT_LIST_URL),
 };
 export const envConfigSchema = z.intersection(

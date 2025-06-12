@@ -1,10 +1,18 @@
 {
-  "extends": "@tsconfig/node18/tsconfig.json",
+  "extends": "@tsconfig/node20/tsconfig.json",
   "include": ["./worker/*", "bin/*"],
   "compilerOptions": {
     "module": "esnext",
     "moduleResolution": "Bundler",
     "strict": true,
     "outDir": "./dist"
-  }
+  },
+  "references": [
+    {
+      "path": "packages/lit-task-auto-top-up"
+    },
+    {
+      "path": "packages/lit-task-client"
+    }
+  ]
 }
